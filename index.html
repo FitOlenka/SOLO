@@ -88,6 +88,25 @@
             cursor: not-allowed;
         }
 
+        .btn-outline {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--heading-color);
+            border: 2px solid var(--heading-color);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--heading-color);
+            color: #fff;
+        }
+
         /* Services Grid */
         .services {
             padding: 100px 20px;
@@ -254,6 +273,51 @@
             font-size: 0.9rem;
         }
 
+        .solo-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .solo-details {
+            display: none;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            text-align: left;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        .solo-details.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .solo-details h3 {
+            color: var(--heading-color);
+            margin: 25px 0 15px 0;
+            font-size: 1.3rem;
+        }
+
+        .solo-details ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .solo-details li {
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            color: #475569;
+        }
+
         /* Form Section */
         .contact {
             padding: 100px 20px;
@@ -308,6 +372,7 @@
             .grid { grid-template-columns: 1fr; }
             .about-container { flex-direction: column; text-align: center; }
             .about-content h2 { text-align: center !important; }
+            .solo-details { padding: 25px 20px; }
             
             /* Вимикаємо затримку анімацій на мобільних пристроях, щоб не чекати появи карток */
             [data-aos-delay] {
@@ -377,6 +442,7 @@
                 <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('4 Рівень: «Ритм»')">Записатися</a>
             </div>
 
+            <!-- Відновлені 5 і 6 рівні -->
             <div class="card" data-aos="fade-up" data-aos-delay="500">
                 <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600&auto=format&fit=crop" alt="Супровід нутриціолога" class="card-img">
                 <div class="level">5 Рівень</div>
@@ -406,12 +472,39 @@
         </div>
     </section>
 
+    <!-- Блок з Гайдом SOLO (Оновлений з деталями) -->
     <section id="solo-guide" class="solo-guide" data-aos="zoom-in">
         <div class="solo-container">
             <div class="solo-badge">Хіт продажу</div>
-            <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: var(--gold-text);">Хочеш почати самостійно? Забирай гайд SOLO</h2>
-            <p style="font-size: 1.2rem; color: #b45309; margin-bottom: 40px;">Все, що потрібно для старту: від рецептів до щоденних ритуалів. Без черг, без очікування, просто зараз.</p>
-            <a href="#contact" class="btn" style="background-color: var(--heading-color); color: #fff; font-size: 1.1rem; padding: 20px 40px;" onclick="selectPlan('Гайд SOLO')">Отримати доступ за 490 грн</a>
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: var(--gold-text);">SOLO: Твій ритм до гармонії 🎼✨</h2>
+            <p style="font-size: 1.2rem; color: #b45309;">Гайд, який навчить тебе чути власне тіло, а не накази фітнес-індустрії.</p>
+            
+            <div class="solo-buttons">
+                <button class="btn-outline" id="toggleSoloBtn" onclick="toggleSoloDetails()">Детальніше про гайд</button>
+                <a href="#contact" class="btn" style="background-color: var(--heading-color); color: #fff; font-size: 1.1rem; padding: 15px 35px;" onclick="selectPlan('Гайд SOLO')">Отримати за 490 грн</a>
+            </div>
+
+            <div class="solo-details" id="soloDetails">
+                <p style="font-weight: 600; color: var(--heading-color); font-size: 1.1rem;">Набридло обирати між «ідеальним пресом» та ментальним здоров'ям? Втомилася від виснажливих дієт та тренувань через біль?</p>
+                <p style="margin-top: 10px; font-style: italic;">Мій маніфест простий: Твоє тіло — це не в'язниця для покарань. Це унікальний інструмент. І людина повинна ЖИТИ, а не страждати.</p>
+                
+                <h3>Що ти отримаєш у SOLO:</h3>
+                <ul>
+                    <li>🍎 <strong>Харчування:</strong> Конструктор «Гармонійної тарілки» без ваг та підрахунку калорій.</li>
+                    <li>🧘‍♀️ <strong>Рух:</strong> 15-хвилинні комплекси для шиї, постави та тазового дна (активація, а не виснаження).</li>
+                    <li>🔇 <strong>Пауза:</strong> Техніки відновлення, які повертають енергію швидше за каву.</li>
+                    <li>👣 <strong>Система «6 тижнів»:</strong> Впроваджуємо по 1 корисній звичці на тиждень — м'яко та назавжди.</li>
+                </ul>
+
+                <h3>Чому цей гайд змінить твоє життя?</h3>
+                <ul>
+                    <li>⏱ <strong>Це економить час:</strong> Тобі не треба жити в залі. 15 хвилин на день достатньо, щоб «інструмент» звучав чисто.</li>
+                    <li>🌱 <strong>Це про здоров’я, а не картинку:</strong> Жодних операцій чи каліцтва. Тільки фізіологічний підхід.</li>
+                    <li>🕊 <strong>Це про свободу:</strong> Ти нарешті дозволиш собі їсти смачно і рухатися в задоволення.</li>
+                </ul>
+
+                <p style="text-align: center; font-weight: 800; font-size: 1.1rem; margin-top: 30px; color: var(--gold-text);">Твоє SOLO починається тут. Налаштуй свій чистий звук вже сьогодні.</p>
+            </div>
         </div>
     </section>
 
@@ -470,6 +563,20 @@
             once: true,
             offset: 50   // Элементы появляются чуть раньше (меньший отступ от края экрана)
         });
+
+        // Функція для розгортання інформації про гайд SOLO
+        function toggleSoloDetails() {
+            const details = document.getElementById('soloDetails');
+            const btn = document.getElementById('toggleSoloBtn');
+            
+            if (details.classList.contains('active')) {
+                details.classList.remove('active');
+                btn.innerHTML = 'Детальніше про гайд';
+            } else {
+                details.classList.add('active');
+                btn.innerHTML = 'Сховати опис';
+            }
+        }
 
         // Функція для автоматичного вибору плану при кліку на картці
         function selectPlan(planValue) {
