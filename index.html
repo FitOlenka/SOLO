@@ -19,7 +19,6 @@
             --gold-border: #f59e0b;
             --gold-text: #92400e;
             --border-color: #e2e8f0;
-            --ai-glow: rgba(138, 154, 91, 0.15);
         }
 
         * {
@@ -187,88 +186,6 @@
             line-height: 1.4;
         }
 
-        /* AI Section */
-        .ai-section {
-            background: linear-gradient(180deg, #ffffff 0%, var(--bg-color) 100%);
-            padding: 100px 20px;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .ai-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .ai-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(138, 154, 91, 0.2);
-            border-radius: 20px;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px var(--ai-glow);
-        }
-
-        .ai-card h3 {
-            color: var(--accent);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .ai-input {
-            width: 100%;
-            background: #f8fafc;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            font-size: 1rem;
-            resize: vertical;
-            min-height: 80px;
-            transition: 0.3s;
-        }
-
-        .ai-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(138, 154, 91, 0.1);
-        }
-
-        .ai-output {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(138, 154, 91, 0.05);
-            border-left: 3px solid var(--accent);
-            border-radius: 0 12px 12px 0;
-            font-size: 0.95rem;
-            color: var(--heading-color);
-            display: none;
-            line-height: 1.7;
-        }
-
-        /* Loading spinner */
-        .loader {
-            border: 3px solid rgba(0, 0, 0, 0.1);
-            border-top: 3px solid var(--accent);
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
         /* About Section */
         .about-section {
             padding: 100px 20px;
@@ -388,7 +305,7 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .section-title { font-size: 2rem; }
-            .grid, .ai-grid { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: 1fr; }
             .about-container { flex-direction: column; text-align: center; }
             .about-content h2 { text-align: center !important; }
             
@@ -460,7 +377,6 @@
                 <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('4 Рівень: «Ритм»')">Записатися</a>
             </div>
 
-            <!-- Відновлені 5 і 6 рівні -->
             <div class="card" data-aos="fade-up" data-aos-delay="500">
                 <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600&auto=format&fit=crop" alt="Супровід нутриціолога" class="card-img">
                 <div class="level">5 Рівень</div>
@@ -487,32 +403,6 @@
                 <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('6 Рівень: «Симфонія»')">Записатися</a>
             </div>
 
-        </div>
-    </section>
-
-    <!-- Gemini AI Section -->
-    <section class="ai-section" data-aos="fade-up">
-        <h2 class="section-title">✨ Нейро-асистенти «Твій Ритм»</h2>
-        <p style="text-align: center; max-width: 650px; margin: -40px auto 50px; color: #64748b;">Спробуй мій авторський підхід прямо зараз. Я навчила штучний інтелект давати поради так, як це роблю я на персональних консультаціях.</p>
-        
-        <div class="ai-grid">
-            <!-- AI Card 1: Smart Recipe -->
-            <div class="ai-card">
-                <h3>🍲 Збери свій смарт-рецепт</h3>
-                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Не знаєш, що з'їсти? Напиши 3-4 інгредієнти, які є в твоєму холодильнику, і ми створимо збалансовану страву.</p>
-                <textarea id="ingredientsInput" class="ai-input" placeholder="Наприклад: яйця, шпинат, вчорашня гречка, помідор..."></textarea>
-                <button id="recipeBtn" class="btn" style="width: 100%;">✨ Згенерувати рецепт</button>
-                <div id="recipeOutput" class="ai-output"></div>
-            </div>
-
-            <!-- AI Card 2: State Tuner -->
-            <div class="ai-card">
-                <h3>🧘‍♀️ Швидке налаштування стану</h3>
-                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Відчуваєш втому, стрес чи напругу в тілі? Напиши, як ти почуваєшся, і отримай швидку вправу для відновлення ритму.</p>
-                <textarea id="moodInput" class="ai-input" placeholder="Наприклад: болить спина після комп'ютера, відчуваю тривогу..."></textarea>
-                <button id="moodBtn" class="btn" style="width: 100%;">✨ Знайти баланс</button>
-                <div id="moodOutput" class="ai-output"></div>
-            </div>
         </div>
     </section>
 
@@ -646,112 +536,6 @@
                 btn.innerHTML = originalBtnText;
                 btn.disabled = false;
             }
-        });
-
-        // --- GEMINI API INTEGRATION ---
-        const apiKey = ""; // API key is injected by the environment
-
-        // Загальна функція для виклику Gemini API
-        async function fetchGeminiContent(userPrompt, systemInstruction, outputElementId, buttonElement) {
-            const outputEl = document.getElementById(outputElementId);
-            const originalBtnText = buttonElement.innerHTML;
-            
-            // Вмикаємо стан завантаження
-            outputEl.innerHTML = '<div class="loader"></div> Налаштовуємо відповідь...';
-            outputEl.style.display = 'block';
-            buttonElement.disabled = true;
-            
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            
-            const payload = {
-                contents: [{ parts: [{ text: userPrompt }] }],
-                systemInstruction: { parts: [{ text: systemInstruction }] }
-            };
-
-            const delays = [1000, 2000, 4000, 8000, 16000];
-            let attempt = 0;
-            
-            while (attempt <= 5) {
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    
-                    if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-                    
-                    const result = await response.json();
-                    let text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                    
-                    if (!text) throw new Error("Порожня відповідь від API");
-
-                    // Просте форматування Markdown у HTML
-                    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Жирний текст
-                    text = text.replace(/\n/g, '<br>'); // Перенесення рядків
-                    
-                    outputEl.innerHTML = text;
-                    buttonElement.disabled = false;
-                    buttonElement.innerHTML = originalBtnText;
-                    return; // Успішне завершення
-                    
-                } catch (error) {
-                    console.error("Помилка генерації (спроба " + (attempt + 1) + "):", error);
-                    
-                    if (attempt < 5) {
-                        await new Promise(resolve => setTimeout(resolve, delays[attempt]));
-                        attempt++;
-                    } else {
-                        outputEl.innerHTML = '<span style="color: #ef4444;">На жаль, мій цифровий асистент зараз перевантажений. Спробуй ще раз трохи пізніше! 🎵</span>';
-                        buttonElement.disabled = false;
-                        buttonElement.innerHTML = originalBtnText;
-                        return;
-                    }
-                }
-            }
-        }
-
-        // Логіка для "Смарт-рецепту"
-        document.getElementById('recipeBtn').addEventListener('click', function() {
-            const input = document.getElementById('ingredientsInput').value.trim();
-            if (!input) {
-                alert("Будь ласка, напиши хоча б пару інгредієнтів!");
-                return;
-            }
-
-            const systemPrompt = `Ти - Олена, професійний тренер та нутриціолог. Твій стиль спілкування - теплий, підтримуюючий, ти іноді використовуєш музичні метафори (ритм, гармонія, ноти). 
-            Завдання: Користувач перерахує інгредієнти. Створи з них швидкий, корисний рецепт. 
-            Обов'язково згадай про баланс (білки, жири, вуглеводи або "метод тарілки"). 
-            Відповідай коротко (до 4-5 речень), українською мовою. Структуруй відповідь, використовуй емодзі.`;
-            
-            fetchGeminiContent(
-                `У мене є: ${input}. Що корисного можна приготувати?`, 
-                systemPrompt, 
-                'recipeOutput', 
-                this
-            );
-        });
-
-        // Логіка для "Налаштування стану"
-        document.getElementById('moodBtn').addEventListener('click', function() {
-            const input = document.getElementById('moodInput').value.trim();
-            if (!input) {
-                alert("Поділися, як ти себе почуваєш, щоб я могла допомогти!");
-                return;
-            }
-
-            const systemPrompt = `Ти - Олена, емпатичний фітнес-тренер та нутриціолог. 
-            Завдання: Користувач опише свій фізичний або емоційний стан (втома, стрес, тривога, біль у спині). 
-            Дай йому коротку (2-3 речення) підтримуючу пораду: це може бути проста розтяжка на 1 хвилину, дихальна техніка або просто теплі слова підтримки і дозвіл на відпочинок. 
-            Використовуй музичні метафори ("налаштуй свій інструмент", "пауза між нотами"). 
-            Відповідай українською мовою.`;
-            
-            fetchGeminiContent(
-                `Мій стан зараз: ${input}. Що порадиш?`, 
-                systemPrompt, 
-                'moodOutput', 
-                this
-            );
         });
     </script>
 </body>
