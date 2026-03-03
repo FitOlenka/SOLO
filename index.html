@@ -391,6 +391,12 @@
             .grid, .ai-grid { grid-template-columns: 1fr; }
             .about-container { flex-direction: column; text-align: center; }
             .about-content h2 { text-align: center !important; }
+            
+            /* Вимикаємо затримку анімацій на мобільних пристроях, щоб не чекати появи карток */
+            [data-aos-delay] {
+                transition-delay: 0s !important;
+                animation-delay: 0s !important;
+            }
         }
     </style>
 </head>
@@ -570,9 +576,9 @@
     <script>
         // Ініціалізація анімацій
         AOS.init({
-            duration: 800,
+            duration: 400, // Ускорено с 800 до 400 мс для более быстрой реакции
             once: true,
-            offset: 100
+            offset: 50   // Элементы появляются чуть раньше (меньший отступ от края экрана)
         });
 
         // Функція для автоматичного вибору плану при кліку на картці
