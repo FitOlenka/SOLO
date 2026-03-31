@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Твій персональний ритм тіла | Олена - тренер та нутриціолог</title>
     
-    <!-- Open Graph Теги для красивого відображення посилання у соцмережах та месенджерах -->
+    <!-- Open Graph Теги -->
     <meta property="og:title" content="Твій персональний ритм тіла | Олена">
     <meta property="og:description" content="Індивідуальний підхід до харчування та тренувань. Налаштуй свій особистий ритм без жорстких дієт та виснажливих тренувань.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop">
@@ -81,6 +81,8 @@
             cursor: pointer;
             border: none;
             font-size: 1rem;
+            text-align: center;
+            width: 100%;
         }
 
         .btn:hover:not(:disabled) {
@@ -144,6 +146,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            height: 100%;
         }
 
         .card:hover {
@@ -180,7 +183,11 @@
             font-size: 0.95rem;
             color: #64748b;
             margin-bottom: 20px;
-            flex-grow: 1;
+        }
+
+        .price-wrap,
+        .price-list {
+            margin-top: auto; 
         }
 
         .price-wrap {
@@ -293,6 +300,10 @@
             gap: 15px;
             flex-wrap: wrap;
             margin-top: 30px;
+        }
+        
+        .solo-buttons .btn {
+            width: auto;
         }
 
         .solo-details {
@@ -436,13 +447,6 @@
             box-shadow: 0 0 0 3px rgba(138, 154, 91, 0.1);
         }
 
-        .submit-btn {
-            width: 100%;
-            margin-top: 10px;
-            padding: 18px;
-            font-size: 1.1rem;
-        }
-
         /* Success Modal */
         .modal-overlay {
             position: fixed;
@@ -519,7 +523,7 @@
     <header class="hero" data-aos="fade-in">
         <h1>Створи ідеальне звучання свого тіла</h1>
         <p>Індивідуальний підхід до харчування та тренувань. Обери свій рівень і почнемо роботу над твоїм найкращим результатом.</p>
-        <a href="#services" class="btn">Обрати формат</a>
+        <a href="#services" class="btn" style="width: auto;">Обрати формат</a>
     </header>
 
     <section id="services" class="services">
@@ -531,10 +535,11 @@
                 <div class="level">1 Рівень</div>
                 <h3>«Налаштування»</h3>
                 <p>Індивідуальний розрахунок КБЖУ. Твій персональний цифровий план: розрахунок норми калорій та балансу білків, жирів і вуглеводів під твої цілі.</p>
+                
                 <div class="price-wrap">
                     <div class="price">500 грн</div>
                 </div>
-                <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('1 Рівень: «Налаштування»')">Записатися</a>
+                <a href="#contact" class="btn" onclick="selectPlan('1 Рівень: «Налаштування»')">Записатися</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="200">
@@ -542,10 +547,11 @@
                 <div class="level">2 Рівень</div>
                 <h3>«Резонанс»</h3>
                 <p>Разова консультація (до 1,5 години). Глибокий аудит твого раціону та звичок. Ми знайдемо «дисонанси» у харчуванні та складемо покроковий план дій на місяць.</p>
+                
                 <div class="price-wrap">
                     <div class="price">1 000 грн</div>
                 </div>
-                <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('2 Рівень: «Резонанс»')">Записатися</a>
+                <a href="#contact" class="btn" onclick="selectPlan('2 Рівень: «Резонанс»')">Записатися</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="300">
@@ -553,10 +559,11 @@
                 <div class="level">3 Рівень</div>
                 <h3>«Акорд»</h3>
                 <p>Разове онлайн-тренування. Одне заняття, щоб відчути свій потенціал, перевірити техніку та отримати заряд енергії.</p>
+                
                 <div class="price-wrap">
                     <div class="price">500 грн</div>
                 </div>
-                <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('3 Рівень: «Акорд»')">Записатися</a>
+                <a href="#contact" class="btn" onclick="selectPlan('3 Рівень: «Акорд»')">Записатися</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="400">
@@ -564,12 +571,13 @@
                 <div class="level">4 Рівень</div>
                 <h3>«Ритм»</h3>
                 <p>Пакети онлайн-тренувань. Системна робота над тілом. Регулярність — це ритм, який веде до стабільного результату.</p>
+                
                 <ul class="price-list">
                     <li><strong>3 600 грн</strong> Абонемент на 8 занять <small>(450 грн/заняття)</small></li>
                     <li><strong>4 300 грн</strong> Абонемент на 10 занять <small>(430 грн/заняття)</small></li>
                     <li><strong>5 000 грн</strong> Абонемент на 12 занять <small>(416 грн/заняття)</small></li>
                 </ul>
-                <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('4 Рівень: «Ритм» (8 занять)')">Записатися</a>
+                <a href="#contact" class="btn" onclick="selectPlan('4 Рівень: «Ритм» (8 занять)')">Записатися</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="500">
@@ -577,10 +585,11 @@
                 <div class="level">5 Рівень</div>
                 <h3>«Дует»</h3>
                 <p>Супровід нутриціолога (1 місяць). Моя щоденна підтримка у твоєму харчуванні. Контроль тарілок 24/7, робота з харчовою поведінкою та підтримка у месенджерах. Без тренувань.</p>
+                
                 <div class="price-wrap">
                     <div class="price">4 000 грн</div>
                 </div>
-                <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('5 Рівень: «Дует»')">Записатися</a>
+                <a href="#contact" class="btn" onclick="selectPlan('5 Рівень: «Дует»')">Записатися</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="600">
@@ -588,11 +597,12 @@
                 <div class="level">6 Рівень</div>
                 <h3>«Симфонія»</h3>
                 <p>Повний супровід (1 місяць). Максимальна гармонія: Харчування + Тренування + Психологічна підтримка. Найкоротший шлях до ідеального звучання твого тіла.</p>
+                
                 <ul class="price-list">
                     <li><strong>3 600 грн</strong> Абонемент на 8 занять <small>(450 грн/заняття)</small></li>
                     <li><strong>5 000 грн</strong> Абонемент на 12 занять <small>(416 грн/заняття)</small></li>
                 </ul>
-                <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('6 Рівень: «Симфонія» (8 занять)')">Записатися</a>
+                <a href="#contact" class="btn" onclick="selectPlan('6 Рівень: «Симфонія» (8 занять)')">Записатися</a>
             </div>
 
         </div>
@@ -690,12 +700,9 @@
                 <input type="text" id="firstName" placeholder="Ваше ім'я" required>
             </div>
             <div class="form-group">
-                <!-- Поле телефону з маскою -->
-                <input type="tel" id="phone" placeholder="+380 (__) ___-__-__" required>
+                <input type="tel" id="phone" placeholder="Введіть номер телефону" required>
             </div>
-            <div class="form-group">
-                <input type="text" id="telegram" placeholder="Ваш нік у Telegram (напр., @olenka)" required>
-            </div>
+            
             <div class="form-group">
                 <select id="selectedPlan" required>
                     <option value="" disabled selected>Оберіть бажаний формат роботи...</option>
@@ -733,25 +740,18 @@
         <div class="modal-content">
             <div class="modal-icon">💚</div>
             <h3 class="modal-title">Дякую за довіру!</h3>
-            <p class="modal-text">Вашу заявку успішно надіслано. Я зв'яжуся з вами у Telegram найближчим часом, щоб обговорити всі деталі.</p>
+            <p class="modal-text">Вашу заявку успішно надіслано. Я зв'яжуся з вами найближчим часом, щоб обговорити всі деталі.</p>
             <button class="btn" onclick="closeModal()" style="width: 100%;">Добре, чекаю</button>
         </div>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Ініціалізація анімацій
-        AOS.init({
-            duration: 400,
-            once: true,
-            offset: 50
-        });
+        AOS.init({ duration: 400, once: true, offset: 50 });
 
-        // Гайд SOLO
         function toggleSoloDetails() {
             const details = document.getElementById('soloDetails');
             const btn = document.getElementById('toggleSoloBtn');
-            
             if (details.classList.contains('active')) {
                 details.classList.remove('active');
                 btn.innerHTML = 'Детальніше про гайд';
@@ -761,73 +761,76 @@
             }
         }
 
-        // Автовибір плану з карток
         function selectPlan(planValue) {
             const selectElement = document.getElementById('selectedPlan');
-            if(selectElement) {
-                selectElement.value = planValue;
-            }
+            if(selectElement) selectElement.value = planValue;
         }
 
-        // Логіка для FAQ (Акордеон)
+        // FAQ 
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                // Закриваємо всі інші
                 faqItems.forEach(i => i.classList.remove('active'));
-                // Якщо не був активним - відкриваємо
-                if (!isActive) {
-                    item.classList.add('active');
-                }
+                if (!isActive) item.classList.add('active');
             });
         });
 
-        // Маска для телефону (Формат: +380 (XX) XXX-XX-XX)
+        // Ідеальна телефонна маска
         const phoneInput = document.getElementById('phone');
+
+        // Підстановка при кліку
+        phoneInput.addEventListener('focus', function(e) {
+            if (e.target.value === '') {
+                e.target.value = '+380 (';
+            }
+        });
+
+        // Видалення, якщо передумав вводити
+        phoneInput.addEventListener('blur', function(e) {
+            if (e.target.value === '+380 (') {
+                e.target.value = '';
+            }
+        });
+
         phoneInput.addEventListener('input', function(e) {
-            let input = e.target.value.replace(/\D/g, ''); // Залишаємо тільки цифри
-            input = input.substring(0, 12); // Максимум 12 цифр
+            let val = e.target.value.replace(/\D/g, ''); // Залишаємо тільки цифри
             
-            // Якщо користувач починає вводити не з 38, автоматично додаємо 380
-            if (input.length > 0 && !input.startsWith('38')) {
-                if(input.startsWith('0')) {
-                    input = '38' + input;
+            if (val.length === 0) {
+                e.target.value = '';
+                return;
+            }
+
+            // Гарантуємо старт з 380
+            if (val.length < 3) {
+                val = '380';
+            } else if (!val.startsWith('380')) {
+                if (val.startsWith('0')) {
+                    val = '38' + val;
                 } else {
-                    input = '380' + input;
+                    val = '380' + val;
                 }
             }
 
-            let formatted = '';
-            if (input.length > 0) formatted = '+' + input.substring(0, 3);
-            if (input.length > 3) formatted += ' (' + input.substring(3, 5);
-            if (input.length > 5) formatted += ') ' + input.substring(5, 8);
-            if (input.length > 8) formatted += '-' + input.substring(8, 10);
-            if (input.length > 10) formatted += '-' + input.substring(10, 12);
-            
+            val = val.substring(0, 12); // Обмежуємо 12 цифрами (380 + 9)
+
+            let formatted = '+380';
+            if (val.length > 3) formatted += ' (' + val.substring(3, 5);
+            if (val.length > 5) formatted += ') ' + val.substring(5, 8);
+            if (val.length > 8) formatted += '-' + val.substring(8, 10);
+            if (val.length > 10) formatted += '-' + val.substring(10, 12);
+
             e.target.value = formatted;
         });
 
-        // Функції для Модального вікна (Повідомлення про успіх)
+        // Модалка
         const modal = document.getElementById('successModal');
-        
-        function showModal() {
-            modal.classList.add('active');
-        }
-        
-        function closeModal() {
-            modal.classList.remove('active');
-        }
+        function showModal() { modal.classList.add('active'); }
+        function closeModal() { modal.classList.remove('active'); }
+        modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
 
-        // Закриття модалки при кліку на темний фон
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Відправка форми в Telegram
+        // Відправка в Telegram
         const TELEGRAM_TOKEN = '8383770088:AAHhuZpQdmX6dR5rjb1X7RS0C413qRZuMIk';
         const CHAT_IDS = ['308207924', '223733844'];
 
@@ -840,36 +843,55 @@
             btn.disabled = true;
 
             const name = document.getElementById('firstName').value;
-            const phone = document.getElementById('phone').value;
-            const telegram = document.getElementById('telegram').value;
+            const rawPhone = document.getElementById('phone').value;
             
             const planSelect = document.getElementById('selectedPlan');
             const planTextWithPrice = planSelect.options[planSelect.selectedIndex].text;
 
-            const message = `🔥 Нова заявка з сайту "Твій Ритм"!\n\n👤 Ім'я: ${name}\n📞 Телефон: ${phone}\n✈️ Telegram: ${telegram}\n🎯 Обраний формат: ${planTextWithPrice}`;
+            // Маска гарантує 12 цифр
+            let linkPhone = rawPhone.replace(/\D/g, ''); 
+
+            const message = `🔥 <b>Нова заявка з сайту "Твій Ритм"!</b>\n\n👤 <b>Ім'я:</b> ${name}\n📞 <b>Телефон:</b> ${rawPhone}\n🎯 <b>Обраний формат:</b> ${planTextWithPrice}`;
 
             try {
-                const sendPromises = CHAT_IDS.map(chatId => 
-                    fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+                const sendPromises = CHAT_IDS.map(chatId => {
+                    const requestBody = {
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'HTML' 
+                    };
+
+                    // Кнопки для швидкого переходу
+                    if (linkPhone.length >= 12) {
+                        requestBody.reply_markup = {
+                            inline_keyboard: [
+                                [
+                                    { text: "💬 Написати в Telegram", url: "https://t.me/+" + linkPhone },
+                                    { text: "💜 Написати в Viber", url: "https://msng.link/vi/" + linkPhone }
+                                ]
+                            ]
+                        };
+                    }
+
+                    return fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({
-                            chat_id: chatId,
-                            text: message
-                        })
-                    })
-                );
+                        body: JSON.stringify(requestBody)
+                    });
+                });
 
                 const responses = await Promise.all(sendPromises);
                 const allOk = responses.every(r => r.ok);
 
                 if (allOk) {
-                    showModal(); // Показуємо красиве вікно замість alert()
+                    showModal(); 
                     this.reset();
+                    // Скидаємо маску телефону
+                    document.getElementById('phone').value = '';
                 } else {
-                    alert('Ой, сталася помилка при відправці. Спробуй ще раз або напиши мені напряму.');
+                    alert('Ой, сталася помилка при відправці. Спробуй ще раз.');
                 }
             } catch (error) {
                 console.error('Помилка відправки в Telegram:', error);
