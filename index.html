@@ -12,8 +12,13 @@
     <meta property="og:url" content="">
     <meta property="og:type" content="website">
 
+    <!-- Шрифти та Анімації -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- CSS для міжнародного вводу телефону -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+
     <style>
         :root {
             --bg-color: #faf9f6;
@@ -426,6 +431,22 @@
             font-family: 'Montserrat', sans-serif;
         }
 
+        /* Налаштування для бібліотеки intl-tel-input */
+        .iti {
+            width: 100%;
+            display: block;
+        }
+        .iti__flag-container {
+            border-radius: 12px 0 0 12px;
+        }
+        .form-hint {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 8px;
+            margin-left: 5px;
+            font-weight: 500;
+        }
+
         select {
             appearance: none;
             -webkit-appearance: none;
@@ -699,8 +720,11 @@
             <div class="form-group">
                 <input type="text" id="firstName" placeholder="Ваше ім'я" required>
             </div>
+            
+            <!-- Нове поле телефону з міжнародним вводом -->
             <div class="form-group">
-                <input type="tel" id="phone" placeholder="Введіть номер телефону" required>
+                <input type="tel" id="phone" required>
+                <div class="form-hint">💚 Вкажіть номер, до якого прив'язаний Telegram або Viber</div>
             </div>
             
             <div class="form-group">
@@ -745,10 +769,15 @@
         </div>
     </div>
 
+    <!-- JS Бібліотеки -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    
     <script>
+        // Ініціалізація анімацій
         AOS.init({ duration: 400, once: true, offset: 50 });
 
+        // Гайд SOLO
         function toggleSoloDetails() {
             const details = document.getElementById('soloDetails');
             const btn = document.getElementById('toggleSoloBtn');
@@ -777,107 +806,49 @@
             });
         });
 
-        // Ідеальна телефонна маска
-        const phoneInput = document.getElementById('phone');
-
-        // Підстановка при кліку
-        phoneInput.addEventListener('focus', function(e) {
-            if (e.target.value === '') {
-                e.target.value = '+380 (';
-            }
+        // Ініціалізація міжнародного поля вводу телефону
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            initialCountry: "ua", // За замовчуванням Україна
+            preferredCountries: ["ua", "pl", "de", "us", "gb", "cz"], // Країни, що будуть зверху списку
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", // Для автоматичного форматування та перевірки
         });
 
-        // Видалення, якщо передумав вводити
-        phoneInput.addEventListener('blur', function(e) {
-            if (e.target.value === '+380 (') {
-                e.target.value = '';
-            }
-        });
-
-        // ЗАХИСТ ВІД КЛІКІВ ВСЕРЕДИНІ ПРЕФІКСА
-        phoneInput.addEventListener('click', function(e) {
-            if (e.target.selectionStart < 6) {
-                e.target.setSelectionRange(e.target.value.length, e.target.value.length);
-            }
-        });
-
-        // ЗАХИСТ ВІД ВИДАЛЕННЯ ПРЕФІКСА (Backspace / Delete)
-        phoneInput.addEventListener('keydown', function(e) {
-            if (e.target.selectionStart <= 6 && (e.key === 'Backspace' || e.key === 'Delete' || e.key === 'ArrowLeft')) {
-                e.preventDefault();
-                e.target.setSelectionRange(e.target.value.length, e.target.value.length);
-            }
-        });
-
-        // Логіка форматування
-        phoneInput.addEventListener('input', function(e) {
-            let val = e.target.value.replace(/\D/g, ''); 
-            
-            if (val.length === 0) {
-                e.target.value = '';
-                return;
-            }
-
-            // Витягуємо лише 9 цифр номера (все, що після 380)
-            let userDigits = '';
-            if (val.startsWith('380')) {
-                userDigits = val.substring(3);
-            } else if (val.startsWith('80')) { 
-                userDigits = val.substring(2);
-            } else if (val.startsWith('0')) { 
-                userDigits = val.substring(1);
-            } else {
-                userDigits = val; 
-            }
-
-            userDigits = userDigits.substring(0, 9); // Ліміт 9 цифр
-
-            // Збираємо рядок заново
-            let formatted = '+380 (';
-            if (userDigits.length > 0) {
-                formatted += userDigits.substring(0, 2);
-            }
-            if (userDigits.length >= 3) {
-                formatted += ') ' + userDigits.substring(2, 5);
-            }
-            if (userDigits.length >= 6) {
-                formatted += '-' + userDigits.substring(5, 7);
-            }
-            if (userDigits.length >= 8) {
-                formatted += '-' + userDigits.substring(7, 9);
-            }
-
-            e.target.value = formatted;
-        });
-
-        // Модалка
+        // Модалка успіху
         const modal = document.getElementById('successModal');
         function showModal() { modal.classList.add('active'); }
         function closeModal() { modal.classList.remove('active'); }
         modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
 
-        // Відправка в Telegram
+        // Відправка форми в Telegram
         const TELEGRAM_TOKEN = '8383770088:AAHhuZpQdmX6dR5rjb1X7RS0C413qRZuMIk';
         const CHAT_IDS = ['308207924', '223733844'];
 
         document.getElementById('leadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            // Перевіряємо, чи валідний введений номер
+            if (!phoneInput.isValidNumber()) {
+                alert("Будь ласка, введіть коректний номер телефону.");
+                return;
+            }
+
             const btn = this.querySelector('.submit-btn');
             const originalBtnText = btn.innerHTML;
             btn.innerHTML = 'Відправляємо...';
             btn.disabled = true;
 
             const name = document.getElementById('firstName').value;
-            const rawPhone = document.getElementById('phone').value;
             
+            // Отримуємо ідеально відформатований міжнародний номер (напр. +380501234567)
+            const fullPhoneNumber = phoneInput.getNumber(); 
+            // Видаляємо "+", щоб залишити тільки цифри для посилань кнопок
+            const linkPhone = fullPhoneNumber.replace(/\D/g, ''); 
+
             const planSelect = document.getElementById('selectedPlan');
             const planTextWithPrice = planSelect.options[planSelect.selectedIndex].text;
 
-            // Збираємо чистий 12-значний номер для кнопок
-            let linkPhone = rawPhone.replace(/\D/g, ''); 
-
-            const message = `🔥 <b>Нова заявка з сайту "Твій Ритм"!</b>\n\n👤 <b>Ім'я:</b> ${name}\n📞 <b>Телефон:</b> ${rawPhone}\n🎯 <b>Обраний формат:</b> ${planTextWithPrice}`;
+            const message = `🔥 <b>Нова заявка з сайту "Твій Ритм"!</b>\n\n👤 <b>Ім'я:</b> ${name}\n📞 <b>Телефон:</b> ${fullPhoneNumber}\n🎯 <b>Обраний формат:</b> ${planTextWithPrice}`;
 
             try {
                 const sendPromises = CHAT_IDS.map(chatId => {
@@ -887,17 +858,15 @@
                         parse_mode: 'HTML' 
                     };
 
-                    // Кнопки для швидкого переходу
-                    if (linkPhone.length >= 12) {
-                        requestBody.reply_markup = {
-                            inline_keyboard: [
-                                [
-                                    { text: "💬 Написати в Telegram", url: "https://t.me/+" + linkPhone },
-                                    { text: "💜 Написати в Viber", url: "https://msng.link/vi/" + linkPhone }
-                                ]
+                    // Кнопки для швидкого переходу (використовуємо linkPhone без плюса)
+                    requestBody.reply_markup = {
+                        inline_keyboard: [
+                            [
+                                { text: "💬 Написати в Telegram", url: "https://t.me/+" + linkPhone },
+                                { text: "💜 Написати в Viber", url: "https://msng.link/vi/" + linkPhone }
                             ]
-                        };
-                    }
+                        ]
+                    };
 
                     return fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
                         method: 'POST',
@@ -914,7 +883,6 @@
                 if (allOk) {
                     showModal(); 
                     this.reset();
-                    document.getElementById('phone').value = ''; // Скидаємо маску
                 } else {
                     alert('Ой, сталася помилка при відправці. Спробуй ще раз.');
                 }
