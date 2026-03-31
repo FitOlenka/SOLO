@@ -191,7 +191,7 @@
         }
 
         .price-wrap,
-        .price-list {
+        .price-list-wrapper {
             margin-top: auto; 
         }
 
@@ -205,6 +205,7 @@
             color: var(--heading-color);
         }
 
+        /* Оновлені стилі для списку тарифів (кнопки) */
         .price-list {
             list-style: none;
             margin-bottom: 25px;
@@ -216,8 +217,26 @@
             padding: 12px 15px;
             border-radius: 10px;
             margin-bottom: 10px;
-            border-left: 4px solid var(--accent);
+            border: 2px solid transparent;
+            border-left: 4px solid #cbd5e1; /* Нейтральна лінія, поки не обрано */
             color: var(--heading-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .price-list li:hover {
+            background-color: #f1f5f9;
+            border-left-color: var(--accent);
+        }
+
+        /* Стиль для ОБРАНОГО тарифу */
+        .price-list li.active-option {
+            background-color: rgba(138, 154, 91, 0.08);
+            border: 2px solid var(--accent);
+            border-left: 6px solid var(--accent);
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .price-list li strong {
@@ -229,6 +248,31 @@
         .price-list li small {
             color: #64748b;
             font-size: 0.85rem;
+        }
+
+        /* Стилі для помилки вибору (анімація і текст) */
+        .plan-warning {
+            display: none;
+            color: #ef4444;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+            background: #fef2f2;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #fca5a5;
+        }
+
+        .shake-anim {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
         }
 
         /* About Section */
@@ -431,14 +475,8 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* Налаштування для бібліотеки intl-tel-input */
-        .iti {
-            width: 100%;
-            display: block;
-        }
-        .iti__flag-container {
-            border-radius: 12px 0 0 12px;
-        }
+        .iti { width: 100%; display: block; }
+        .iti__flag-container { border-radius: 12px 0 0 12px; }
         .form-hint {
             font-size: 0.85rem;
             color: #64748b;
@@ -531,11 +569,7 @@
             .about-container { flex-direction: column; text-align: center; }
             .about-content h2 { text-align: center !important; }
             .solo-details { padding: 25px 20px; }
-            
-            [data-aos-delay] {
-                transition-delay: 0s !important;
-                animation-delay: 0s !important;
-            }
+            [data-aos-delay] { transition-delay: 0s !important; animation-delay: 0s !important; }
         }
     </style>
 </head>
@@ -593,12 +627,24 @@
                 <h3>«Ритм»</h3>
                 <p>Пакети онлайн-тренувань. Системна робота над тілом. Регулярність — це ритм, який веде до стабільного результату.</p>
                 
-                <ul class="price-list">
-                    <li><strong>3 600 грн</strong> Абонемент на 8 занять <small>(450 грн/заняття)</small></li>
-                    <li><strong>4 300 грн</strong> Абонемент на 10 занять <small>(430 грн/заняття)</small></li>
-                    <li><strong>5 000 грн</strong> Абонемент на 12 занять <small>(416 грн/заняття)</small></li>
-                </ul>
-                <a href="#contact" class="btn" onclick="selectPlan('4 Рівень: «Ритм» (8 занять)')">Записатися</a>
+                <div class="price-list-wrapper">
+                    <!-- Попередження, приховане за замовчуванням -->
+                    <div id="warn-lvl-4" class="plan-warning">👆 Будь ласка, оберіть варіант</div>
+                    
+                    <ul class="price-list" id="list-lvl-4">
+                        <li onclick="selectSubPlan(this, 'btn-lvl-4', '4 Рівень: «Ритм» (8 занять)', 'warn-lvl-4')">
+                            <strong>3 600 грн</strong> Абонемент на 8 занять <small>(450 грн/заняття)</small>
+                        </li>
+                        <li onclick="selectSubPlan(this, 'btn-lvl-4', '4 Рівень: «Ритм» (10 занять)', 'warn-lvl-4')">
+                            <strong>4 300 грн</strong> Абонемент на 10 занять <small>(430 грн/заняття)</small>
+                        </li>
+                        <li onclick="selectSubPlan(this, 'btn-lvl-4', '4 Рівень: «Ритм» (12 занять)', 'warn-lvl-4')">
+                            <strong>5 000 грн</strong> Абонемент на 12 занять <small>(416 грн/заняття)</small>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Кнопка без встановленого плану. Перевіряється у функції checkPlan -->
+                <a href="#contact" class="btn" id="btn-lvl-4" data-plan="" onclick="return checkPlan(this, 'warn-lvl-4', 'list-lvl-4', event)">Записатися</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="500">
@@ -619,11 +665,20 @@
                 <h3>«Симфонія»</h3>
                 <p>Повний супровід (1 місяць). Максимальна гармонія: Харчування + Тренування + Психологічна підтримка. Найкоротший шлях до ідеального звучання твого тіла.</p>
                 
-                <ul class="price-list">
-                    <li><strong>3 600 грн</strong> Абонемент на 8 занять <small>(450 грн/заняття)</small></li>
-                    <li><strong>5 000 грн</strong> Абонемент на 12 занять <small>(416 грн/заняття)</small></li>
-                </ul>
-                <a href="#contact" class="btn" onclick="selectPlan('6 Рівень: «Симфонія» (8 занять)')">Записатися</a>
+                <div class="price-list-wrapper">
+                    <!-- Попередження, приховане за замовчуванням -->
+                    <div id="warn-lvl-6" class="plan-warning">👆 Будь ласка, оберіть варіант</div>
+                    
+                    <ul class="price-list" id="list-lvl-6">
+                        <li onclick="selectSubPlan(this, 'btn-lvl-6', '6 Рівень: «Симфонія» (8 занять)', 'warn-lvl-6')">
+                            <strong>3 600 грн</strong> Абонемент на 8 занять <small>(450 грн/заняття)</small>
+                        </li>
+                        <li onclick="selectSubPlan(this, 'btn-lvl-6', '6 Рівень: «Симфонія» (12 занять)', 'warn-lvl-6')">
+                            <strong>5 000 грн</strong> Абонемент на 12 занять <small>(416 грн/заняття)</small>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#contact" class="btn" id="btn-lvl-6" data-plan="" onclick="return checkPlan(this, 'warn-lvl-6', 'list-lvl-6', event)">Записатися</a>
             </div>
 
         </div>
@@ -721,7 +776,6 @@
                 <input type="text" id="firstName" placeholder="Ваше ім'я" required>
             </div>
             
-            <!-- Нове поле телефону з міжнародним вводом -->
             <div class="form-group">
                 <input type="tel" id="phone" required>
                 <div class="form-hint">💚 Вкажіть номер, до якого прив'язаний Telegram або Viber</div>
@@ -774,7 +828,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     
     <script>
-        // Ініціалізація анімацій
         AOS.init({ duration: 400, once: true, offset: 50 });
 
         // Гайд SOLO
@@ -790,9 +843,54 @@
             }
         }
 
+        // Функція для запису звичайного плану (1, 2, 3, 5 рівні)
         function selectPlan(planValue) {
             const selectElement = document.getElementById('selectedPlan');
             if(selectElement) selectElement.value = planValue;
+        }
+
+        // Функція для вибору тарифу ВСЕРЕДИНІ картки (рівні 4, 6)
+        function selectSubPlan(element, buttonId, planValue, warningId) {
+            // Приховуємо попередження, якщо воно було
+            const warning = document.getElementById(warningId);
+            if (warning) warning.style.display = 'none';
+
+            // Знімаємо виділення з усіх сусідніх варіантів
+            const siblings = element.parentElement.children;
+            for (let li of siblings) {
+                li.classList.remove('active-option');
+            }
+            // Виділяємо обраний
+            element.classList.add('active-option');
+            
+            // Зберігаємо вибір у кнопку
+            document.getElementById(buttonId).dataset.plan = planValue;
+        }
+
+        // Перевірка, чи обрав користувач тариф, перед тим як скролити вниз
+        function checkPlan(btnElement, warningId, listId, event) {
+            const planValue = btnElement.dataset.plan;
+            
+            if (!planValue) {
+                // Зупиняємо перехід вниз
+                event.preventDefault(); 
+                
+                // Показуємо червоне попередження
+                const warning = document.getElementById(warningId);
+                warning.style.display = 'block';
+                
+                // Додаємо анімацію "трусіння" до списку
+                const list = document.getElementById(listId);
+                list.classList.remove('shake-anim');
+                void list.offsetWidth; // Перезапуск анімації
+                list.classList.add('shake-anim');
+                
+                return false;
+            }
+            
+            // Якщо все ок - встановлюємо у форму і пропускаємо скрол
+            selectPlan(planValue);
+            return true;
         }
 
         // FAQ 
@@ -809,9 +907,9 @@
         // Ініціалізація міжнародного поля вводу телефону
         const phoneInputField = document.querySelector("#phone");
         const phoneInput = window.intlTelInput(phoneInputField, {
-            initialCountry: "ua", // За замовчуванням Україна
-            preferredCountries: ["ua", "pl", "de", "us", "gb", "cz"], // Країни, що будуть зверху списку
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", // Для автоматичного форматування та перевірки
+            initialCountry: "ua", 
+            preferredCountries: ["ua", "pl", "de", "us", "gb", "cz"], 
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", 
         });
 
         // Модалка успіху
@@ -827,7 +925,6 @@
         document.getElementById('leadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Перевіряємо, чи валідний введений номер
             if (!phoneInput.isValidNumber()) {
                 alert("Будь ласка, введіть коректний номер телефону.");
                 return;
@@ -839,10 +936,7 @@
             btn.disabled = true;
 
             const name = document.getElementById('firstName').value;
-            
-            // Отримуємо ідеально відформатований міжнародний номер (напр. +380501234567)
             const fullPhoneNumber = phoneInput.getNumber(); 
-            // Видаляємо "+", щоб залишити тільки цифри для посилань кнопок
             const linkPhone = fullPhoneNumber.replace(/\D/g, ''); 
 
             const planSelect = document.getElementById('selectedPlan');
@@ -858,7 +952,6 @@
                         parse_mode: 'HTML' 
                     };
 
-                    // Кнопки для швидкого переходу (використовуємо linkPhone без плюса)
                     requestBody.reply_markup = {
                         inline_keyboard: [
                             [
