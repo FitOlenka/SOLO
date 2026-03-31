@@ -9,10 +9,10 @@
     <style>
         :root {
             /* Світла спокійна палітра */
-            --bg-color: #faf9f6; /* М'який білий/кремовий */
-            --text-color: #334155; /* Темно-сірий для читабельності */
+            --bg-color: #faf9f6;
+            --text-color: #334155;
             --heading-color: #1e293b; 
-            --accent: #8a9a5b; /* Спокійний зелений (шалфей) */
+            --accent: #8a9a5b;
             --accent-hover: #6b7a46;
             --card-bg: #ffffff;
             --gold-bg: #fef3c7;
@@ -39,7 +39,6 @@
         .hero {
             text-align: center;
             padding: 120px 20px;
-            /* Світлий градієнт та спокійне фото для фону */
             background: linear-gradient(rgba(250, 249, 246, 0.85), rgba(250, 249, 246, 0.95)), url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1920&auto=format&fit=crop') center/cover;
             min-height: 60vh;
             display: flex;
@@ -187,22 +186,31 @@
             color: var(--heading-color);
         }
 
-        .old-price {
-            text-decoration: line-through;
-            color: #94a3b8;
-            font-size: 1rem;
-            margin-top: 5px;
+        /* Стилі для списку тарифів (Рівні 4 та 6) */
+        .price-list {
+            list-style: none;
+            margin-bottom: 25px;
+            text-align: left;
         }
 
-        .note {
-            background-color: var(--gold-bg);
-            border-left: 3px solid var(--gold-border);
-            padding: 10px 15px;
+        .price-list li {
+            background: #f8fafc;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent);
+            color: var(--heading-color);
+        }
+
+        .price-list li strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .price-list li small {
+            color: #64748b;
             font-size: 0.85rem;
-            color: var(--gold-text);
-            margin-bottom: 20px;
-            border-radius: 0 5px 5px 0;
-            line-height: 1.4;
         }
 
         /* About Section */
@@ -352,6 +360,11 @@
             background-size: 1em;
             cursor: pointer;
         }
+        
+        optgroup {
+            font-weight: 700;
+            color: var(--accent);
+        }
 
         input:focus, select:focus {
             border-color: var(--accent);
@@ -374,7 +387,6 @@
             .about-content h2 { text-align: center !important; }
             .solo-details { padding: 25px 20px; }
             
-            /* Вимикаємо затримку анімацій на мобільних пристроях, щоб не чекати появи карток */
             [data-aos-delay] {
                 transition-delay: 0s !important;
                 animation-delay: 0s !important;
@@ -400,8 +412,7 @@
                 <h3>«Налаштування»</h3>
                 <p>Індивідуальний розрахунок КБЖУ. Твій персональний цифровий план: розрахунок норми калорій та балансу білків, жирів і вуглеводів під твої цілі.</p>
                 <div class="price-wrap">
-                    <div class="price">350 грн</div>
-                    <div class="old-price">Звичайна ціна: 500 грн</div>
+                    <div class="price">500 грн</div>
                 </div>
                 <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('1 Рівень: «Налаштування»')">Записатися</a>
             </div>
@@ -410,10 +421,9 @@
                 <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=600&auto=format&fit=crop" alt="Консультація" class="card-img">
                 <div class="level">2 Рівень</div>
                 <h3>«Резонанс»</h3>
-                <p>Разова консультація (60 хв). Глибокий аудит твого раціону та звичок. Ми знайдемо «дисонанси» у харчуванні та складемо покроковий план дій на місяць.</p>
+                <p>Разова консультація (до 1,5 години). Глибокий аудит твого раціону та звичок. Ми знайдемо «дисонанси» у харчуванні та складемо покроковий план дій на місяць.</p>
                 <div class="price-wrap">
-                    <div class="price">700 грн</div>
-                    <div class="old-price">Звичайна ціна: 1000 грн</div>
+                    <div class="price">1 000 грн</div>
                 </div>
                 <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('2 Рівень: «Резонанс»')">Записатися</a>
             </div>
@@ -424,8 +434,7 @@
                 <h3>«Акорд»</h3>
                 <p>Разове онлайн-тренування. Одне заняття, щоб відчути свій потенціал, перевірити техніку та отримати заряд енергії.</p>
                 <div class="price-wrap">
-                    <div class="price">400 грн</div>
-                    <div class="old-price" style="visibility: hidden;">Звичайна ціна</div>
+                    <div class="price">500 грн</div>
                 </div>
                 <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('3 Рівень: «Акорд»')">Записатися</a>
             </div>
@@ -434,12 +443,13 @@
                 <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop" alt="Пакет тренувань" class="card-img">
                 <div class="level">4 Рівень</div>
                 <h3>«Ритм»</h3>
-                <p>Пакет онлайн-тренувань (8 занять). Системна робота над тілом. Регулярність — це ритм, який веде до стабільного результату.</p>
-                <div class="price-wrap">
-                    <div class="price">2400 грн</div>
-                    <div class="old-price">Звичайна ціна: 2800 грн</div>
-                </div>
-                <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('4 Рівень: «Ритм»')">Записатися</a>
+                <p>Пакети онлайн-тренувань. Системна робота над тілом. Регулярність — це ритм, який веде до стабільного результату.</p>
+                <ul class="price-list">
+                    <li><strong>3 600 грн</strong> Абонемент на 8 занять <small>(450 грн/заняття)</small></li>
+                    <li><strong>4 300 грн</strong> Абонемент на 10 занять <small>(430 грн/заняття)</small></li>
+                    <li><strong>5 000 грн</strong> Абонемент на 12 занять <small>(416 грн/заняття)</small></li>
+                </ul>
+                <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('4 Рівень: «Ритм» (8 занять)')">Записатися</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="500">
@@ -447,10 +457,8 @@
                 <div class="level">5 Рівень</div>
                 <h3>«Дует»</h3>
                 <p>Супровід нутриціолога (1 місяць). Моя щоденна підтримка у твоєму харчуванні. Контроль тарілок 24/7, робота з харчовою поведінкою та підтримка у месенджерах. Без тренувань.</p>
-                <div class="note">Спеціальна ціна діє за умови надання зворотного зв’язку та можливості публікації вашого результату (можна без фото обличчя).</div>
                 <div class="price-wrap">
-                    <div class="price">2800 грн</div>
-                    <div class="old-price">Звичайна ціна: 4000 грн</div>
+                    <div class="price">4 000 грн</div>
                 </div>
                 <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('5 Рівень: «Дует»')">Записатися</a>
             </div>
@@ -460,18 +468,17 @@
                 <div class="level">6 Рівень</div>
                 <h3>«Симфонія»</h3>
                 <p>Повний супровід (1 місяць). Максимальна гармонія: Харчування + Тренування + Психологічна підтримка. Найкоротший шлях до ідеального звучання твого тіла.</p>
-                <div class="note">Спеціальна ціна діє за умови надання зворотного зв’язку та можливості публікації вашого результату (можна без фото обличчя).</div>
-                <div class="price-wrap">
-                    <div class="price">4500 грн</div>
-                    <div class="old-price">Звичайна ціна: 6500 грн</div>
-                </div>
-                <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('6 Рівень: «Симфонія»')">Записатися</a>
+                <ul class="price-list">
+                    <li><strong>3 600 грн</strong> Абонемент на 8 занять <small>(450 грн/заняття)</small></li>
+                    <li><strong>5 000 грн</strong> Абонемент на 12 занять <small>(416 грн/заняття)</small></li>
+                </ul>
+                <a href="#contact" class="btn" style="text-align: center;" onclick="selectPlan('6 Рівень: «Симфонія» (8 занять)')">Записатися</a>
             </div>
 
         </div>
     </section>
 
-    <!-- Блок з Гайдом SOLO (Оновлений з деталями) -->
+    <!-- Блок з Гайдом SOLO -->
     <section id="solo-guide" class="solo-guide" data-aos="zoom-in">
         <div class="solo-container">
             <div class="solo-badge">Хіт продажу</div>
@@ -537,12 +544,23 @@
             <div class="form-group">
                 <select id="selectedPlan" required>
                     <option value="" disabled selected>Оберіть бажаний формат роботи...</option>
-                    <option value="1 Рівень: «Налаштування»">1 Рівень: «Налаштування» (350 грн)</option>
-                    <option value="2 Рівень: «Резонанс»">2 Рівень: «Резонанс» (700 грн)</option>
-                    <option value="3 Рівень: «Акорд»">3 Рівень: «Акорд» (400 грн)</option>
-                    <option value="4 Рівень: «Ритм»">4 Рівень: «Ритм» (2400 грн)</option>
-                    <option value="5 Рівень: «Дует»">5 Рівень: «Дует» (2800 грн)</option>
-                    <option value="6 Рівень: «Симфонія»">6 Рівень: «Симфонія» (4500 грн)</option>
+                    <option value="1 Рівень: «Налаштування»">1 Рівень: «Налаштування» (500 грн)</option>
+                    <option value="2 Рівень: «Резонанс»">2 Рівень: «Резонанс» (1000 грн)</option>
+                    <option value="3 Рівень: «Акорд»">3 Рівень: «Акорд» (500 грн)</option>
+                    
+                    <optgroup label="4 Рівень: «Ритм»">
+                        <option value="4 Рівень: «Ритм» (8 занять)">4 Рівень: «Ритм» - 8 занять (3600 грн)</option>
+                        <option value="4 Рівень: «Ритм» (10 занять)">4 Рівень: «Ритм» - 10 занять (4300 грн)</option>
+                        <option value="4 Рівень: «Ритм» (12 занять)">4 Рівень: «Ритм» - 12 занять (5000 грн)</option>
+                    </optgroup>
+
+                    <option value="5 Рівень: «Дует»">5 Рівень: «Дует» (4000 грн)</option>
+                    
+                    <optgroup label="6 Рівень: «Симфонія»">
+                        <option value="6 Рівень: «Симфонія» (8 занять)">6 Рівень: «Симфонія» - 8 занять (3600 грн)</option>
+                        <option value="6 Рівень: «Симфонія» (12 занять)">6 Рівень: «Симфонія» - 12 занять (5000 грн)</option>
+                    </optgroup>
+
                     <option value="Гайд SOLO">Гайд SOLO (490 грн)</option>
                 </select>
             </div>
@@ -556,14 +574,12 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Ініціалізація анімацій
         AOS.init({
-            duration: 400, // Ускорено с 800 до 400 мс для более быстрой реакции
+            duration: 400,
             once: true,
-            offset: 50   // Элементы появляются чуть раньше (меньший отступ от края экрана)
+            offset: 50
         });
 
-        // Функція для розгортання інформації про гайд SOLO
         function toggleSoloDetails() {
             const details = document.getElementById('soloDetails');
             const btn = document.getElementById('toggleSoloBtn');
@@ -577,7 +593,6 @@
             }
         }
 
-        // Функція для автоматичного вибору плану при кліку на картці
         function selectPlan(planValue) {
             const selectElement = document.getElementById('selectedPlan');
             if(selectElement) {
@@ -585,9 +600,8 @@
             }
         }
 
-        // Форма та відправка в Telegram
         const TELEGRAM_TOKEN = '8383770088:AAHhuZpQdmX6dR5rjb1X7RS0C413qRZuMIk';
-        const CHAT_IDS = ['308207924', '223733844']; // Додано обидва Chat ID
+        const CHAT_IDS = ['308207924', '223733844'];
 
         document.getElementById('leadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -601,15 +615,12 @@
             const phone = document.getElementById('phone').value;
             const telegram = document.getElementById('telegram').value;
             
-            // Получаем текст выбранного элемента списка (включая цену)
             const planSelect = document.getElementById('selectedPlan');
             const planTextWithPrice = planSelect.options[planSelect.selectedIndex].text;
 
-            // Формуємо текст повідомлення з обраним планом та ціною
             const message = `🔥 Нова заявка з сайту "Твій Ритм"!\n\n👤 Ім'я: ${name}\n📞 Телефон: ${phone}\n✈️ Telegram: ${telegram}\n🎯 Обраний формат: ${planTextWithPrice}`;
 
             try {
-                // Відправляємо запит до Telegram API для кожного ID у масиві
                 const sendPromises = CHAT_IDS.map(chatId => 
                     fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
                         method: 'POST',
@@ -623,15 +634,12 @@
                     })
                 );
 
-                // Очікуємо виконання всіх відправок
                 const responses = await Promise.all(sendPromises);
-                
-                // Перевіряємо, чи успішно відправлено хоча б на один із ID (або на всі)
                 const allOk = responses.every(r => r.ok);
 
                 if (allOk) {
                     alert('Дякуємо! Ваша заявка успішно відправлена. Я зв\'яжуся з тобою найближчим часом у Telegram 💚');
-                    this.reset(); // Очищаємо форму
+                    this.reset();
                 } else {
                     alert('Ой, сталася помилка при відправці. Спробуй ще раз або напиши мені напряму.');
                 }
