@@ -7,13 +7,14 @@
     
     <!-- Open Graph Теги -->
     <meta property="og:title" content="Твій персональний ритм тіла | Олена">
-    <meta property="og:description" content="Індивідуальний підхід до харчування та тренувань. Налаштуй свій особистий ритм без жорстких дієт та виснажливих тренувань.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:description" content="Індивідуальний підхід до харчування та тренувань. Налаштуй свій особистий ритм без жорстких дієт.">
+    <!-- Для прев'ю в соцмережах -->
+    <meta property="og:image" content="https://i.postimg.cc/HL3ttWVV/IMG-4797.jpg">
     <meta property="og:url" content="">
     <meta property="og:type" content="website">
 
     <!-- Шрифти та Анімації -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- CSS для міжнародного вводу телефону -->
@@ -31,6 +32,7 @@
             --gold-border: #f59e0b;
             --gold-text: #92400e;
             --border-color: #e2e8f0;
+            --nav-height: 80px;
         }
 
         * {
@@ -40,6 +42,11 @@
             font-family: 'Montserrat', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--nav-height); 
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -47,42 +54,67 @@
             overflow-x: hidden;
         }
 
-        /* Header / Hero */
-        .hero {
-            text-align: center;
-            padding: 120px 20px;
-            background: linear-gradient(rgba(250, 249, 246, 0.85), rgba(250, 249, 246, 0.95)), url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1920&auto=format&fit=crop') center/cover;
-            min-height: 60vh;
+        /* --- НАВІГАЦІЯ (ШАПКА) --- */
+        .top-nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: var(--nav-height);
+            background: rgba(250, 249, 246, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .top-nav .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--heading-color);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
             align-items: center;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-weight: 800;
-            line-height: 1.2;
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
             color: var(--heading-color);
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 650px;
-            margin: 0 auto 40px auto;
-            color: #475569;
-        }
-
+        /* --- КНОПКИ --- */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
             background-color: var(--accent);
             color: white;
             padding: 15px 35px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            transition: 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
             border: none;
             font-size: 1rem;
@@ -94,6 +126,7 @@
             background-color: var(--accent-hover);
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(138, 154, 91, 0.3);
+            color: white;
         }
 
         .btn:disabled {
@@ -102,27 +135,101 @@
         }
 
         .btn-outline {
-            display: inline-block;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
             background-color: transparent;
             color: var(--heading-color);
             border: 2px solid var(--heading-color);
             padding: 15px 35px;
             border-radius: 50px;
             font-weight: 600;
-            transition: 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
             font-size: 1rem;
-            margin-bottom: 15px;
+            text-decoration: none;
         }
 
         .btn-outline:hover {
             background-color: var(--heading-color);
             color: #fff;
+            transform: translateY(-3px);
         }
 
-        /* Services Grid */
+        /* --- ГОЛОВНИЙ ЕКРАН (HERO) --- */
+        .hero {
+            padding: calc(var(--nav-height) + 60px) 5% 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            gap: 50px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(138, 154, 91, 0.15);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--heading-color);
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            margin-bottom: 40px;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            object-fit: cover;
+            border: 8px solid #fff;
+        }
+
+        /* --- СЕКЦІЯ ТАРИФІВ --- */
         .services {
-            padding: 100px 20px;
+            padding: 100px 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -132,6 +239,7 @@
             font-size: 2.5rem;
             margin-bottom: 60px;
             color: var(--heading-color);
+            font-weight: 800;
         }
 
         .grid {
@@ -171,7 +279,7 @@
 
         .level {
             color: var(--accent);
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -182,20 +290,19 @@
             font-size: 1.5rem;
             margin-bottom: 15px;
             color: var(--heading-color);
+            font-weight: 700;
         }
 
         .card p {
             font-size: 0.95rem;
             color: #64748b;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            flex-grow: 1; 
         }
 
         .price-wrap,
         .price-list-wrapper {
             margin-top: auto; 
-        }
-
-        .price-wrap {
             margin-bottom: 25px;
         }
 
@@ -205,10 +312,9 @@
             color: var(--heading-color);
         }
 
-        /* Оновлені стилі для списку тарифів (кнопки) */
+        /* Список тарифів всередині карток */
         .price-list {
             list-style: none;
-            margin-bottom: 25px;
             text-align: left;
         }
 
@@ -218,11 +324,10 @@
             border-radius: 10px;
             margin-bottom: 10px;
             border: 2px solid transparent;
-            border-left: 4px solid #cbd5e1; /* Нейтральна лінія, поки не обрано */
+            border-left: 4px solid #cbd5e1;
             color: var(--heading-color);
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .price-list li:hover {
@@ -230,7 +335,6 @@
             border-left-color: var(--accent);
         }
 
-        /* Стиль для ОБРАНОГО тарифу */
         .price-list li.active-option {
             background-color: rgba(138, 154, 91, 0.08);
             border: 2px solid var(--accent);
@@ -241,7 +345,7 @@
 
         .price-list li strong {
             display: block;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 2px;
         }
 
@@ -250,7 +354,6 @@
             font-size: 0.85rem;
         }
 
-        /* Стилі для помилки вибору (анімація і текст) */
         .plan-warning {
             display: none;
             color: #ef4444;
@@ -275,52 +378,10 @@
             40%, 60% { transform: translate3d(4px, 0, 0); }
         }
 
-        /* About Section */
-        .about-section {
-            padding: 100px 20px;
-            background-color: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .about-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .about-img-wrap {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .about-img {
-            width: 100%;
-            max-width: 450px;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(138, 154, 91, 0.15);
-            object-fit: cover;
-            border: 6px solid #fff;
-        }
-
-        .about-content {
-            flex: 1.2;
-            min-width: 300px;
-        }
-
-        .about-content p {
-            margin-bottom: 20px;
-            color: #475569;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        /* Solo Guide Section */
+        /* --- SOLO ГАЙД --- */
         .solo-guide {
             background: linear-gradient(135deg, var(--gold-bg) 0%, #fde68a 100%);
-            padding: 100px 20px;
+            padding: 100px 5%;
             text-align: center;
             position: relative;
         }
@@ -343,22 +404,30 @@
             font-size: 0.9rem;
         }
 
+        .solo-guide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--gold-text);
+            font-weight: 800;
+        }
+
         .solo-buttons {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
-            margin-top: 30px;
+            margin-top: 40px;
         }
         
-        .solo-buttons .btn {
+        .solo-buttons .btn, .solo-buttons .btn-outline {
             width: auto;
+            margin-bottom: 0;
         }
 
         .solo-details {
             display: none;
             background: #ffffff;
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 40px;
             margin-top: 40px;
             text-align: left;
@@ -377,24 +446,73 @@
 
         .solo-details h3 {
             color: var(--heading-color);
-            margin: 25px 0 15px 0;
+            margin: 30px 0 15px 0;
             font-size: 1.3rem;
+            font-weight: 700;
         }
 
         .solo-details ul {
             list-style: none;
-            margin-bottom: 20px;
         }
 
         .solo-details li {
             margin-bottom: 12px;
             font-size: 1.05rem;
             color: #475569;
+            padding-left: 30px;
+            position: relative;
         }
 
-        /* FAQ Section */
+        .solo-details li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        /* --- ПРО МЕНЕ --- */
+        .about-section {
+            padding: 100px 5%;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-img-wrap {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(138, 154, 91, 0.15);
+            object-fit: cover;
+        }
+
+        .about-content {
+            flex: 1.2;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            color: #475569;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* --- FAQ --- */
         .faq-section {
-            padding: 80px 20px;
+            padding: 100px 5%;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -402,10 +520,10 @@
         .faq-item {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 16px;
             margin-bottom: 15px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
             transition: 0.3s ease;
         }
 
@@ -421,14 +539,14 @@
             justify-content: space-between;
             align-items: center;
             color: var(--heading-color);
-            font-size: 1.05rem;
+            font-size: 1.1rem;
         }
 
         .faq-question::after {
             content: '+';
             font-size: 1.5rem;
             color: var(--accent);
-            transition: 0.3s;
+            transition: transform 0.3s;
         }
 
         .faq-item.active .faq-question::after {
@@ -446,16 +564,24 @@
         }
 
         .faq-item.active .faq-answer {
-            max-height: 300px;
-            padding: 0 25px 20px 25px;
+            max-height: 400px;
+            padding: 0 25px 25px 25px;
             opacity: 1;
         }
 
-        /* Form Section */
+        /* --- ФОРМА --- */
         .contact {
-            padding: 80px 20px 100px;
-            max-width: 600px;
+            padding: 60px 5% 100px;
+            max-width: 650px;
             margin: 0 auto;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
         }
 
         .form-group {
@@ -466,17 +592,23 @@
             width: 100%;
             padding: 18px 20px;
             border-radius: 12px;
-            border: 1px solid var(--border-color);
-            background-color: #ffffff;
+            border: 2px solid var(--border-color);
+            background-color: #f8fafc;
             color: var(--text-color);
             font-size: 1rem;
             outline: none;
             transition: 0.3s;
-            font-family: 'Montserrat', sans-serif;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(138, 154, 91, 0.1);
         }
 
         .iti { width: 100%; display: block; }
         .iti__flag-container { border-radius: 12px 0 0 12px; }
+        
         .form-hint {
             font-size: 0.85rem;
             color: #64748b;
@@ -488,11 +620,10 @@
         select {
             appearance: none;
             -webkit-appearance: none;
-            -moz-appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1em;
+            background-position: right 1.2rem center;
+            background-size: 1.2em;
             cursor: pointer;
         }
         
@@ -501,23 +632,15 @@
             color: var(--accent);
         }
 
-        input:focus, select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(138, 154, 91, 0.1);
-        }
-
-        /* Success Modal */
+        /* --- МОДАЛЬНЕ ВІКНО --- */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(30, 41, 59, 0.7);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 2000;
             opacity: 0;
             visibility: hidden;
             transition: 0.3s ease;
@@ -531,12 +654,12 @@
 
         .modal-content {
             background: #fff;
-            padding: 40px;
-            border-radius: 20px;
+            padding: 50px 40px;
+            border-radius: 24px;
             text-align: center;
             max-width: 400px;
             width: 90%;
-            transform: scale(0.8);
+            transform: scale(0.9);
             transition: 0.3s ease;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
@@ -545,92 +668,126 @@
             transform: scale(1);
         }
 
-        .modal-icon {
-            font-size: 4rem;
-            margin-bottom: 15px;
+        .modal-icon { font-size: 4rem; margin-bottom: 15px; }
+        .modal-title { font-size: 1.5rem; color: var(--heading-color); margin-bottom: 15px; font-weight: 800; }
+        .modal-text { color: #475569; margin-bottom: 30px; line-height: 1.6; }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            color: #64748b;
+            font-size: 0.9rem;
+            background-color: #fff;
         }
 
-        .modal-title {
-            font-size: 1.5rem;
-            color: var(--heading-color);
-            margin-bottom: 10px;
-        }
-
-        .modal-text {
-            color: #475569;
-            margin-bottom: 25px;
-        }
-
-        /* Адаптивність */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .section-title { font-size: 2rem; }
-            .grid { grid-template-columns: 1fr; }
+        /* --- АДАПТИВНІСТЬ (МОБІЛЬНІ) --- */
+        @media (max-width: 900px) {
+            .hamburger { display: block; }
+            .nav-links {
+                position: absolute;
+                top: var(--nav-height);
+                left: 0;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.3s ease-in-out;
+                gap: 20px;
+            }
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: calc(var(--nav-height) + 40px);
+            }
+            .hero h1 { font-size: 2.6rem; }
+            .hero-buttons { justify-content: center; }
+            .hero-image { order: -1; margin-bottom: 30px; } 
+            .hero-image img { max-width: 80%; border-width: 5px; }
+            
             .about-container { flex-direction: column; text-align: center; }
-            .about-content h2 { text-align: center !important; }
-            .solo-details { padding: 25px 20px; }
-            [data-aos-delay] { transition-delay: 0s !important; animation-delay: 0s !important; }
+            .about-content .section-title { text-align: center !important; }
+            .solo-guide h2 { font-size: 2rem; }[data-aos-delay] { transition-delay: 0s !important; animation-delay: 0s !important; }
         }
     </style>
 </head>
 <body>
 
-    <header class="hero" data-aos="fade-in">
-        <h1>Створи ідеальне звучання свого тіла</h1>
-        <p>Індивідуальний підхід до харчування та тренувань. Обери свій рівень і почнемо роботу над твоїм найкращим результатом.</p>
-        <a href="#services" class="btn" style="width: auto;">Обрати формат</a>
+    <!-- Навігація -->
+    <nav class="top-nav">
+        <a href="#" class="logo">SOLO.</a>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="nav-links" id="navLinks">
+            <a href="#services" onclick="toggleMenu()">Формати роботи</a>
+            <a href="#solo-guide" onclick="toggleMenu()">Гайд</a>
+            <a href="#about" onclick="toggleMenu()">Про мене</a>
+            <a href="#faq" onclick="toggleMenu()">FAQ</a>
+            <a href="#contact" onclick="toggleMenu()" style="color: var(--accent);">Контакти</a>
+        </div>
+    </nav>
+
+    <!-- Головний екран -->
+    <header class="hero">
+        <div class="hero-content" data-aos="fade-right">
+            <div class="hero-badge">Тренер та нутриціолог</div>
+            <h1>Створи ідеальне <br><span class="highlight">звучання</span> свого тіла</h1>
+            <p>Індивідуальний підхід до харчування та тренувань. Налаштуй свій особистий ритм без жорстких дієт та виснаження.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn" style="width: auto;">Обрати формат</a>
+                <a href="#solo-guide" class="btn-outline" style="width: auto;">Гайд SOLO</a>
+            </div>
+        </div>
+        <div class="hero-image" data-aos="fade-left" data-aos-delay="200">
+            <!-- СЮДИ ВСТАВИШ НОВЕ ФОТО. Поки що стоїть гарна тимчасова картинка -->
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop" alt="Гармонія тіла">
+        </div>
     </header>
 
+    <!-- Секція послуг -->
     <section id="services" class="services">
         <h2 class="section-title" data-aos="fade-up">Формати роботи</h2>
         <div class="grid">
             
-            <div class="card" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://i.postimg.cc/CLV7s8db/image.png" alt="Налаштування раціону" class="card-img">
+            <div class="card" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=600&auto=format&fit=crop" alt="Налаштування раціону" class="card-img" loading="lazy">
                 <div class="level">1 Рівень</div>
                 <h3>«Налаштування»</h3>
                 <p>Індивідуальний розрахунок КБЖУ. Твій персональний цифровий план: розрахунок норми калорій та балансу білків, жирів і вуглеводів під твої цілі.</p>
-                
-                <div class="price-wrap">
-                    <div class="price">500 грн</div>
-                </div>
+                <div class="price-wrap"><div class="price">500 грн</div></div>
                 <a href="#contact" class="btn" onclick="selectPlan('1 Рівень: «Налаштування»')">Записатися</a>
             </div>
 
-            <div class="card" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=600&auto=format&fit=crop" alt="Консультація" class="card-img">
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=600&auto=format&fit=crop" alt="Консультація" class="card-img" loading="lazy">
                 <div class="level">2 Рівень</div>
                 <h3>«Резонанс»</h3>
                 <p>Разова консультація (до 1,5 години). Глибокий аудит твого раціону та звичок. Ми знайдемо «дисонанси» у харчуванні та складемо покроковий план дій на місяць.</p>
-                
-                <div class="price-wrap">
-                    <div class="price">1 000 грн</div>
-                </div>
+                <div class="price-wrap"><div class="price">1 000 грн</div></div>
                 <a href="#contact" class="btn" onclick="selectPlan('2 Рівень: «Резонанс»')">Записатися</a>
             </div>
 
-            <div class="card" data-aos="fade-up" data-aos-delay="300">
-                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop" alt="Разове тренування" class="card-img">
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop" alt="Разове тренування" class="card-img" loading="lazy">
                 <div class="level">3 Рівень</div>
                 <h3>«Акорд»</h3>
                 <p>Разове онлайн-тренування. Одне заняття, щоб відчути свій потенціал, перевірити техніку та отримати заряд енергії.</p>
-                
-                <div class="price-wrap">
-                    <div class="price">500 грн</div>
-                </div>
+                <div class="price-wrap"><div class="price">500 грн</div></div>
                 <a href="#contact" class="btn" onclick="selectPlan('3 Рівень: «Акорд»')">Записатися</a>
             </div>
 
-            <div class="card" data-aos="fade-up" data-aos-delay="400">
-                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop" alt="Пакет тренувань" class="card-img">
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop" alt="Пакет тренувань" class="card-img" loading="lazy">
                 <div class="level">4 Рівень</div>
                 <h3>«Ритм»</h3>
                 <p>Пакети онлайн-тренувань. Системна робота над тілом. Регулярність — це ритм, який веде до стабільного результату.</p>
-                
                 <div class="price-list-wrapper">
-                    <!-- Попередження, приховане за замовчуванням -->
-                    <div id="warn-lvl-4" class="plan-warning">👆 Будь ласка, оберіть варіант</div>
-                    
+                    <div id="warn-lvl-4" class="plan-warning">👆 Оберіть варіант зі списку</div>
                     <ul class="price-list" id="list-lvl-4">
                         <li onclick="selectSubPlan(this, 'btn-lvl-4', '4 Рівень: «Ритм» (8 занять)', 'warn-lvl-4')">
                             <strong>3 600 грн</strong> Абонемент на 8 занять <small>(450 грн/заняття)</small>
@@ -643,32 +800,25 @@
                         </li>
                     </ul>
                 </div>
-                <!-- Кнопка без встановленого плану. Перевіряється у функції checkPlan -->
                 <a href="#contact" class="btn" id="btn-lvl-4" data-plan="" onclick="return checkPlan(this, 'warn-lvl-4', 'list-lvl-4', event)">Записатися</a>
             </div>
 
-            <div class="card" data-aos="fade-up" data-aos-delay="500">
-                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600&auto=format&fit=crop" alt="Супровід нутриціолога" class="card-img">
+            <div class="card" data-aos="fade-up" data-aos-delay="400">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600&auto=format&fit=crop" alt="Супровід нутриціолога" class="card-img" loading="lazy">
                 <div class="level">5 Рівень</div>
                 <h3>«Дует»</h3>
-                <p>Супровід нутриціолога (1 місяць). Моя щоденна підтримка у твоєму харчуванні. Контроль тарілок 24/7, робота з харчовою поведінкою та підтримка у месенджерах. Без тренувань.</p>
-                
-                <div class="price-wrap">
-                    <div class="price">4 000 грн</div>
-                </div>
+                <p>Супровід нутриціолога (1 місяць). Моя щоденна підтримка. Контроль тарілок 24/7, робота з харчовою поведінкою та підтримка у месенджерах. Без тренувань.</p>
+                <div class="price-wrap"><div class="price">4 000 грн</div></div>
                 <a href="#contact" class="btn" onclick="selectPlan('5 Рівень: «Дует»')">Записатися</a>
             </div>
 
-            <div class="card" data-aos="fade-up" data-aos-delay="600">
-                <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=600&auto=format&fit=crop" alt="Повний супровід" class="card-img">
+            <div class="card" data-aos="fade-up" data-aos-delay="500">
+                <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=600&auto=format&fit=crop" alt="Повний супровід" class="card-img" loading="lazy">
                 <div class="level">6 Рівень</div>
                 <h3>«Симфонія»</h3>
-                <p>Повний супровід (1 місяць). Максимальна гармонія: Харчування + Тренування + Психологічна підтримка. Найкоротший шлях до ідеального звучання твого тіла.</p>
-                
+                <p>Повний супровід (1 місяць). Максимальна гармонія: Харчування + Тренування + Психологічна підтримка. Найкоротший шлях до результату.</p>
                 <div class="price-list-wrapper">
-                    <!-- Попередження, приховане за замовчуванням -->
-                    <div id="warn-lvl-6" class="plan-warning">👆 Будь ласка, оберіть варіант</div>
-                    
+                    <div id="warn-lvl-6" class="plan-warning">👆 Оберіть варіант зі списку</div>
                     <ul class="price-list" id="list-lvl-6">
                         <li onclick="selectSubPlan(this, 'btn-lvl-6', '6 Рівень: «Симфонія» (8 занять)', 'warn-lvl-6')">
                             <strong>3 600 грн</strong> Абонемент на 8 занять <small>(450 грн/заняття)</small>
@@ -684,47 +834,46 @@
         </div>
     </section>
 
-    <!-- Блок з Гайдом SOLO -->
+    <!-- Гайд SOLO -->
     <section id="solo-guide" class="solo-guide" data-aos="zoom-in">
         <div class="solo-container">
             <div class="solo-badge">Хіт продажу</div>
-            <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: var(--gold-text);">SOLO: Твій ритм до гармонії 🎼✨</h2>
-            <p style="font-size: 1.2rem; color: #b45309;">Гайд, який навчить тебе чути власне тіло, а не накази фітнес-індустрії.</p>
+            <h2>SOLO: Твій ритм до гармонії 🎼✨</h2>
+            <p style="font-size: 1.2rem; color: #b45309; font-weight: 500;">Гайд, який навчить тебе чути власне тіло, а не накази фітнес-індустрії.</p>
             
             <div class="solo-buttons">
                 <button class="btn-outline" id="toggleSoloBtn" onclick="toggleSoloDetails()">Детальніше про гайд</button>
-                <a href="#contact" class="btn" style="background-color: var(--heading-color); color: #fff; font-size: 1.1rem; padding: 15px 35px;" onclick="selectPlan('Гайд SOLO')">Отримати за 490 грн</a>
+                <a href="#contact" class="btn" style="background-color: var(--heading-color); border-color: var(--heading-color);" onclick="selectPlan('Гайд SOLO')">Отримати за 490 грн</a>
             </div>
 
             <div class="solo-details" id="soloDetails">
-                <p style="font-weight: 600; color: var(--heading-color); font-size: 1.1rem;">Набридло обирати між «ідеальним пресом» та ментальним здоров'ям? Втомилася від виснажливих дієт та тренувань через біль?</p>
-                <p style="margin-top: 10px; font-style: italic;">Мій маніфест простий: Твоє тіло — це не в'язниця для покарань. Це унікальний інструмент. І людина повинна ЖИТИ, а не страждати.</p>
+                <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 10px;">Набридло обирати між «ідеальним пресом» та ментальним здоров'ям? Втомилася від виснажливих дієт та тренувань через біль?</p>
+                <p style="font-style: italic; color: #64748b; margin-bottom: 20px;">Мій маніфест простий: Твоє тіло — це не в'язниця для покарань. Це унікальний інструмент. І людина повинна ЖИТИ, а не страждати.</p>
                 
                 <h3>Що ти отримаєш у SOLO:</h3>
                 <ul>
-                    <li>🍎 <strong>Харчування:</strong> Конструктор «Гармонійної тарілки» без ваг та підрахунку калорій.</li>
-                    <li>🧘‍♀️ <strong>Рух:</strong> 15-хвилинні комплекси для шиї, постави та тазового дна (активація, а не виснаження).</li>
-                    <li>🔇 <strong>Пауза:</strong> Техніки відновлення, які повертають енергію швидше за каву.</li>
-                    <li>👣 <strong>Система «6 тижнів»:</strong> Впроваджуємо по 1 корисній звичці на тиждень — м'яко та назавжди.</li>
+                    <li><strong>Харчування:</strong> Конструктор «Гармонійної тарілки» без ваг та підрахунку калорій.</li>
+                    <li><strong>Рух:</strong> 15-хвилинні комплекси для шиї, постави та тазового дна (активація, а не виснаження).</li>
+                    <li><strong>Пауза:</strong> Техніки відновлення, які повертають енергію швидше за каву.</li>
+                    <li><strong>Система «6 тижнів»:</strong> Впроваджуємо по 1 корисній звичці на тиждень — м'яко та назавжди.</li>
                 </ul>
 
-                <h3>Чому цей гайд змінить твоє життя?</h3>
-                <ul>
-                    <li>⏱ <strong>Це економить час:</strong> Тобі не треба жити в залі. 15 хвилин на день достатньо, щоб «інструмент» звучав чисто.</li>
-                    <li>🌱 <strong>Це про здоров’я, а не картинку:</strong> Жодних операцій чи каліцтва. Тільки фізіологічний підхід.</li>
-                    <li>🕊 <strong>Це про свободу:</strong> Ти нарешті дозволиш собі їсти смачно і рухатися в задоволення.</li>
-                </ul>
-
-                <p style="text-align: center; font-weight: 800; font-size: 1.1rem; margin-top: 30px; color: var(--gold-text);">Твоє SOLO починається тут. Налаштуй свій чистий звук вже сьогодні.</p>
+                <p style="text-align: center; font-weight: 800; font-size: 1.2rem; margin-top: 40px; color: var(--gold-text);">Твоє SOLO починається тут. Налаштуй свій чистий звук вже сьогодні.</p>
+                
+                <!-- Нова кнопка в самому кінці тексту -->
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="#contact" class="btn" style="background-color: var(--heading-color); color: #fff; width: auto; padding: 15px 40px;" onclick="selectPlan('Гайд SOLO')">Отримати гайд</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Блок Про Мене -->
+    <!-- Про Мене -->
     <section id="about" class="about-section" data-aos="fade-up">
         <div class="about-container">
             <div class="about-img-wrap">
-                <img src="https://i.postimg.cc/HL3ttWVV/IMG-4797.jpg" alt="Олена - тренер та нутриціолог" class="about-img">
+                <!-- Повернув твоє фото сюди -->
+                <img src="https://i.postimg.cc/HL3ttWVV/IMG-4797.jpg" alt="Олена - тренер та нутриціолог" class="about-img" loading="lazy">
             </div>
             <div class="about-content">
                 <h2 class="section-title" style="text-align: left; margin-bottom: 25px;">Привіт! Я Олена.</h2>
@@ -735,9 +884,9 @@
         </div>
     </section>
 
-    <!-- FAQ (Поширені запитання) -->
-    <section class="faq-section" data-aos="fade-up">
-        <h2 class="section-title">Поширені запитання</h2>
+    <!-- FAQ -->
+    <section id="faq" class="faq-section" data-aos="fade-up">
+        <h2 class="section-title">Часті запитання</h2>
         
         <div class="faq-item">
             <div class="faq-question">Чи потрібен спеціальний інвентар для тренувань?</div>
@@ -763,74 +912,83 @@
         <div class="faq-item">
             <div class="faq-question">Як проходять онлайн-тренування?</div>
             <div class="faq-answer">
-                <p>Ми зідзвонюємося по відеозв'язку (Telegram або Zoom) у заздалегідь узгоджений час. Я показую техніку виконання вправ, уважно слідкую за вашими рухами та коригую вас у реальному часі. Це так само ефективно, як і заняття в залі з тренером!</p>
+                <p>Ми зідзвонюємося по відеозв'язку (Telegram або Zoom) у заздалегідь узгоджений час. Я показую техніку виконання вправ, уважно слідкую за вашими рухами та коригую вас у реальному часі.</p>
             </div>
         </div>
     </section>
 
-    <!-- Form Section -->
+    <!-- Форма -->
     <section id="contact" class="contact" data-aos="fade-up">
-        <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: var(--heading-color);">Почнемо роботу?</h2>
-        <form id="leadForm">
-            <div class="form-group">
-                <input type="text" id="firstName" placeholder="Ваше ім'я" required>
-            </div>
-            
-            <div class="form-group">
-                <input type="tel" id="phone" required>
-                <div class="form-hint">💚 Вкажіть номер, до якого прив'язаний Telegram або Viber</div>
-            </div>
-            
-            <div class="form-group">
-                <select id="selectedPlan" required>
-                    <option value="" disabled selected>Оберіть бажаний формат роботи...</option>
-                    <option value="1 Рівень: «Налаштування»">1 Рівень: «Налаштування» (500 грн)</option>
-                    <option value="2 Рівень: «Резонанс»">2 Рівень: «Резонанс» (1000 грн)</option>
-                    <option value="3 Рівень: «Акорд»">3 Рівень: «Акорд» (500 грн)</option>
-                    
-                    <optgroup label="4 Рівень: «Ритм»">
-                        <option value="4 Рівень: «Ритм» (8 занять)">4 Рівень: «Ритм» - 8 занять (3600 грн)</option>
-                        <option value="4 Рівень: «Ритм» (10 занять)">4 Рівень: «Ритм» - 10 занять (4300 грн)</option>
-                        <option value="4 Рівень: «Ритм» (12 занять)">4 Рівень: «Ритм» - 12 занять (5000 грн)</option>
-                    </optgroup>
+        <h2 class="section-title" style="margin-bottom: 40px;">Почнемо роботу?</h2>
+        <div class="form-card">
+            <form id="leadForm">
+                <div class="form-group">
+                    <input type="text" id="firstName" placeholder="Ваше ім'я" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="tel" id="phone" required>
+                    <div class="form-hint">💚 Вкажіть номер, де є Telegram або Viber</div>
+                </div>
+                
+                <div class="form-group">
+                    <select id="selectedPlan" required>
+                        <option value="" disabled selected>Оберіть бажаний формат роботи...</option>
+                        <option value="1 Рівень: «Налаштування»">1 Рівень: «Налаштування» (500 грн)</option>
+                        <option value="2 Рівень: «Резонанс»">2 Рівень: «Резонанс» (1000 грн)</option>
+                        <option value="3 Рівень: «Акорд»">3 Рівень: «Акорд» (500 грн)</option>
+                        
+                        <optgroup label="4 Рівень: «Ритм»">
+                            <option value="4 Рівень: «Ритм» (8 занять)">4 Рівень: «Ритм» - 8 занять (3600 грн)</option>
+                            <option value="4 Рівень: «Ритм» (10 занять)">4 Рівень: «Ритм» - 10 занять (4300 грн)</option>
+                            <option value="4 Рівень: «Ритм» (12 занять)">4 Рівень: «Ритм» - 12 занять (5000 грн)</option>
+                        </optgroup>
 
-                    <option value="5 Рівень: «Дует»">5 Рівень: «Дует» (4000 грн)</option>
-                    
-                    <optgroup label="6 Рівень: «Симфонія»">
-                        <option value="6 Рівень: «Симфонія» (8 занять)">6 Рівень: «Симфонія» - 8 занять (3600 грн)</option>
-                        <option value="6 Рівень: «Симфонія» (12 занять)">6 Рівень: «Симфонія» - 12 занять (5000 грн)</option>
-                    </optgroup>
+                        <option value="5 Рівень: «Дует»">5 Рівень: «Дует» (4000 грн)</option>
+                        
+                        <optgroup label="6 Рівень: «Симфонія»">
+                            <option value="6 Рівень: «Симфонія» (8 занять)">6 Рівень: «Симфонія» - 8 занять (3600 грн)</option>
+                            <option value="6 Рівень: «Симфонія» (12 занять)">6 Рівень: «Симфонія» - 12 занять (5000 грн)</option>
+                        </optgroup>
 
-                    <option value="Гайд SOLO">Гайд SOLO (490 грн)</option>
-                </select>
-            </div>
-            <button type="submit" class="btn submit-btn">Відправити заявку</button>
-            <p style="text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 15px;">Натискаючи кнопку, ви погоджуєтеся на обробку даних.</p>
-        </form>
+                        <option value="Гайд SOLO">Гайд SOLO (490 грн)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn submit-btn">Відправити заявку</button>
+                <p style="text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 15px;">Натискаючи кнопку, ви погоджуєтеся на обробку даних.</p>
+            </form>
+        </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-color); color: #64748b; font-size: 0.9rem; background-color: #fff;">
-        <p>&copy; 2026 Олена. Твій тренер та нутриціолог. Усі права захищені.</p>
+    <footer>
+        <p>&copy; 2024 Олена. Твій тренер та нутриціолог. Усі права захищені.</p>
     </footer>
 
-    <!-- Success Modal -->
+    <!-- Модалка успіху -->
     <div class="modal-overlay" id="successModal">
         <div class="modal-content">
             <div class="modal-icon">💚</div>
             <h3 class="modal-title">Дякую за довіру!</h3>
             <p class="modal-text">Вашу заявку успішно надіслано. Я зв'яжуся з вами найближчим часом, щоб обговорити всі деталі.</p>
-            <button class="btn" onclick="closeModal()" style="width: 100%;">Добре, чекаю</button>
+            <button class="btn" onclick="closeModal()">Добре, чекаю</button>
         </div>
     </div>
 
-    <!-- JS Бібліотеки -->
+    <!-- JS Скрипти -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     
     <script>
-        AOS.init({ duration: 400, once: true, offset: 50 });
+        // Ініціалізація анімацій
+        AOS.init({ duration: 600, once: true, offset: 50 });
 
-        // Гайд SOLO
+        // Мобільне меню
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        // Гайд SOLO (розгортання/згортання)
         function toggleSoloDetails() {
             const details = document.getElementById('soloDetails');
             const btn = document.getElementById('toggleSoloBtn');
@@ -843,57 +1001,45 @@
             }
         }
 
-        // Функція для запису звичайного плану (1, 2, 3, 5 рівні)
+        // Запис плану у випадаючий список форми
         function selectPlan(planValue) {
             const selectElement = document.getElementById('selectedPlan');
             if(selectElement) selectElement.value = planValue;
         }
 
-        // Функція для вибору тарифу ВСЕРЕДИНІ картки (рівні 4, 6)
+        // Вибір під-тарифу (кнопки всередині карток 4 і 6 рівнів)
         function selectSubPlan(element, buttonId, planValue, warningId) {
-            // Приховуємо попередження, якщо воно було
             const warning = document.getElementById(warningId);
             if (warning) warning.style.display = 'none';
 
-            // Знімаємо виділення з усіх сусідніх варіантів
             const siblings = element.parentElement.children;
             for (let li of siblings) {
                 li.classList.remove('active-option');
             }
-            // Виділяємо обраний
             element.classList.add('active-option');
             
-            // Зберігаємо вибір у кнопку
             document.getElementById(buttonId).dataset.plan = planValue;
         }
 
-        // Перевірка, чи обрав користувач тариф, перед тим як скролити вниз
+        // Перевірка перед переходом до форми
         function checkPlan(btnElement, warningId, listId, event) {
             const planValue = btnElement.dataset.plan;
-            
             if (!planValue) {
-                // Зупиняємо перехід вниз
                 event.preventDefault(); 
-                
-                // Показуємо червоне попередження
                 const warning = document.getElementById(warningId);
                 warning.style.display = 'block';
                 
-                // Додаємо анімацію "трусіння" до списку
                 const list = document.getElementById(listId);
                 list.classList.remove('shake-anim');
-                void list.offsetWidth; // Перезапуск анімації
+                void list.offsetWidth; 
                 list.classList.add('shake-anim');
-                
                 return false;
             }
-            
-            // Якщо все ок - встановлюємо у форму і пропускаємо скрол
             selectPlan(planValue);
             return true;
         }
 
-        // FAQ 
+        // FAQ Аккордеон
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
@@ -904,15 +1050,15 @@
             });
         });
 
-        // Ініціалізація міжнародного поля вводу телефону
+        // Телефонний ввід
         const phoneInputField = document.querySelector("#phone");
         const phoneInput = window.intlTelInput(phoneInputField, {
             initialCountry: "ua", 
-            preferredCountries: ["ua", "pl", "de", "us", "gb", "cz"], 
+            preferredCountries:["ua", "pl", "de", "us", "gb", "cz"], 
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", 
         });
 
-        // Модалка успіху
+        // Модалка
         const modal = document.getElementById('successModal');
         function showModal() { modal.classList.add('active'); }
         function closeModal() { modal.classList.remove('active'); }
@@ -920,7 +1066,7 @@
 
         // Відправка форми в Telegram
         const TELEGRAM_TOKEN = '8383770088:AAHhuZpQdmX6dR5rjb1X7RS0C413qRZuMIk';
-        const CHAT_IDS = ['308207924', '223733844'];
+        const CHAT_IDS =['308207924', '223733844'];
 
         document.getElementById('leadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -942,30 +1088,26 @@
             const planSelect = document.getElementById('selectedPlan');
             const planTextWithPrice = planSelect.options[planSelect.selectedIndex].text;
 
-            const message = `🔥 <b>Нова заявка з сайту "Твій Ритм"!</b>\n\n👤 <b>Ім'я:</b> ${name}\n📞 <b>Телефон:</b> ${fullPhoneNumber}\n🎯 <b>Обраний формат:</b> ${planTextWithPrice}`;
+            const message = `🔥 <b>Нова заявка з сайту "SOLO"!</b>\n\n👤 <b>Ім'я:</b> ${name}\n📞 <b>Телефон:</b> ${fullPhoneNumber}\n🎯 <b>Обраний формат:</b> ${planTextWithPrice}`;
 
             try {
                 const sendPromises = CHAT_IDS.map(chatId => {
                     const requestBody = {
                         chat_id: chatId,
                         text: message,
-                        parse_mode: 'HTML' 
-                    };
-
-                    requestBody.reply_markup = {
-                        inline_keyboard: [
-                            [
-                                { text: "💬 Написати в Telegram", url: "https://t.me/+" + linkPhone },
-                                { text: "💜 Написати в Viber", url: "https://msng.link/vi/" + linkPhone }
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [[
+                                    { text: "💬 Написати в Telegram", url: "https://t.me/+" + linkPhone },
+                                    { text: "💜 Написати в Viber", url: "https://msng.link/vi/" + linkPhone }
+                                ]
                             ]
-                        ]
+                        }
                     };
 
                     return fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(requestBody)
                     });
                 });
