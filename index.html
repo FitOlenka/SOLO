@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Твій персональний ритм тіла</title>
+    <title>Твій персональний ритм тіла | Олена - тренер та нутриціолог</title>
+    
+    <!-- Open Graph Теги для красивого відображення посилання у соцмережах та месенджерах -->
+    <meta property="og:title" content="Твій персональний ритм тіла | Олена">
+    <meta property="og:description" content="Індивідуальний підхід до харчування та тренувань. Налаштуй свій особистий ритм без жорстких дієт та виснажливих тренувань.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
-            /* Світла спокійна палітра */
             --bg-color: #faf9f6;
             --text-color: #334155;
             --heading-color: #1e293b; 
@@ -186,7 +193,6 @@
             color: var(--heading-color);
         }
 
-        /* Стилі для списку тарифів (Рівні 4 та 6) */
         .price-list {
             list-style: none;
             margin-bottom: 25px;
@@ -326,9 +332,68 @@
             color: #475569;
         }
 
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--heading-color);
+            font-size: 1.05rem;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent);
+            transition: 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '−';
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            padding: 0 25px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 25px 20px 25px;
+            opacity: 1;
+        }
+
         /* Form Section */
         .contact {
-            padding: 100px 20px;
+            padding: 80px 20px 100px;
             max-width: 600px;
             margin: 0 auto;
         }
@@ -376,6 +441,61 @@
             margin-top: 10px;
             padding: 18px;
             font-size: 1.1rem;
+        }
+
+        /* Success Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 41, 59, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transform: scale(0.8);
+            transition: 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--heading-color);
+            margin-bottom: 10px;
+        }
+
+        .modal-text {
+            color: #475569;
+            margin-bottom: 25px;
         }
 
         /* Адаптивність */
@@ -529,17 +649,52 @@
         </div>
     </section>
 
+    <!-- FAQ (Поширені запитання) -->
+    <section class="faq-section" data-aos="fade-up">
+        <h2 class="section-title">Поширені запитання</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">Чи потрібен спеціальний інвентар для тренувань?</div>
+            <div class="faq-answer">
+                <p>Ні, для старту вам достатньо лише килимка та бажання. Ми працюємо з вагою власного тіла. Згодом, якщо захочете посилити навантаження, можна буде додати фітнес-резинки або легкі гантелі.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Я ніколи раніше не тренувалася, чи підійдуть мені заняття?</div>
+            <div class="faq-answer">
+                <p>Абсолютно! Мій підхід максимально м'який та адаптивний. На першому тренуванні ми проведемо діагностику, і я підберу вправи, які будуть комфортними та безпечними саме для вашого рівня підготовки.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Чи доведеться мені голодувати або відмовлятися від солодкого?</div>
+            <div class="faq-answer">
+                <p>Жодних жорстких дієт! Я навчу вас системі «Гармонійної тарілки». Ви зможете їсти смачно, ситно і навіть залишати місце для улюблених смаколиків, при цьому досягаючи своїх цілей.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Як проходять онлайн-тренування?</div>
+            <div class="faq-answer">
+                <p>Ми зідзвонюємося по відеозв'язку (Telegram або Zoom) у заздалегідь узгоджений час. Я показую техніку виконання вправ, уважно слідкую за вашими рухами та коригую вас у реальному часі. Це так само ефективно, як і заняття в залі з тренером!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
     <section id="contact" class="contact" data-aos="fade-up">
-        <h2 style="text-align: center; font-size: 2rem; margin-bottom: 40px; color: var(--heading-color);">Залишити заявку</h2>
+        <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: var(--heading-color);">Почнемо роботу?</h2>
         <form id="leadForm">
             <div class="form-group">
-                <input type="text" id="firstName" placeholder="Ім'я" required>
+                <input type="text" id="firstName" placeholder="Ваше ім'я" required>
             </div>
             <div class="form-group">
-                <input type="tel" id="phone" placeholder="Номер телефону" required>
+                <!-- Поле телефону з маскою -->
+                <input type="tel" id="phone" placeholder="+380 (__) ___-__-__" required>
             </div>
             <div class="form-group">
-                <input type="text" id="telegram" placeholder="Telegram (наприклад, @FitnessOlenka)" required>
+                <input type="text" id="telegram" placeholder="Ваш нік у Telegram (напр., @olenka)" required>
             </div>
             <div class="form-group">
                 <select id="selectedPlan" required>
@@ -564,7 +719,8 @@
                     <option value="Гайд SOLO">Гайд SOLO (490 грн)</option>
                 </select>
             </div>
-            <button type="submit" class="btn submit-btn">Відправити дані</button>
+            <button type="submit" class="btn submit-btn">Відправити заявку</button>
+            <p style="text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 15px;">Натискаючи кнопку, ви погоджуєтеся на обробку даних.</p>
         </form>
     </section>
 
@@ -572,14 +728,26 @@
         <p>&copy; 2026 Олена. Твій тренер та нутриціолог. Усі права захищені.</p>
     </footer>
 
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">💚</div>
+            <h3 class="modal-title">Дякую за довіру!</h3>
+            <p class="modal-text">Вашу заявку успішно надіслано. Я зв'яжуся з вами у Telegram найближчим часом, щоб обговорити всі деталі.</p>
+            <button class="btn" onclick="closeModal()" style="width: 100%;">Добре, чекаю</button>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Ініціалізація анімацій
         AOS.init({
             duration: 400,
             once: true,
             offset: 50
         });
 
+        // Гайд SOLO
         function toggleSoloDetails() {
             const details = document.getElementById('soloDetails');
             const btn = document.getElementById('toggleSoloBtn');
@@ -593,6 +761,7 @@
             }
         }
 
+        // Автовибір плану з карток
         function selectPlan(planValue) {
             const selectElement = document.getElementById('selectedPlan');
             if(selectElement) {
@@ -600,6 +769,65 @@
             }
         }
 
+        // Логіка для FAQ (Акордеон)
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                // Закриваємо всі інші
+                faqItems.forEach(i => i.classList.remove('active'));
+                // Якщо не був активним - відкриваємо
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Маска для телефону (Формат: +380 (XX) XXX-XX-XX)
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function(e) {
+            let input = e.target.value.replace(/\D/g, ''); // Залишаємо тільки цифри
+            input = input.substring(0, 12); // Максимум 12 цифр
+            
+            // Якщо користувач починає вводити не з 38, автоматично додаємо 380
+            if (input.length > 0 && !input.startsWith('38')) {
+                if(input.startsWith('0')) {
+                    input = '38' + input;
+                } else {
+                    input = '380' + input;
+                }
+            }
+
+            let formatted = '';
+            if (input.length > 0) formatted = '+' + input.substring(0, 3);
+            if (input.length > 3) formatted += ' (' + input.substring(3, 5);
+            if (input.length > 5) formatted += ') ' + input.substring(5, 8);
+            if (input.length > 8) formatted += '-' + input.substring(8, 10);
+            if (input.length > 10) formatted += '-' + input.substring(10, 12);
+            
+            e.target.value = formatted;
+        });
+
+        // Функції для Модального вікна (Повідомлення про успіх)
+        const modal = document.getElementById('successModal');
+        
+        function showModal() {
+            modal.classList.add('active');
+        }
+        
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        // Закриття модалки при кліку на темний фон
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Відправка форми в Telegram
         const TELEGRAM_TOKEN = '8383770088:AAHhuZpQdmX6dR5rjb1X7RS0C413qRZuMIk';
         const CHAT_IDS = ['308207924', '223733844'];
 
@@ -638,7 +866,7 @@
                 const allOk = responses.every(r => r.ok);
 
                 if (allOk) {
-                    alert('Дякуємо! Ваша заявка успішно відправлена. Я зв\'яжуся з тобою найближчим часом у Telegram 💚');
+                    showModal(); // Показуємо красиве вікно замість alert()
                     this.reset();
                 } else {
                     alert('Ой, сталася помилка при відправці. Спробуй ще раз або напиши мені напряму.');
