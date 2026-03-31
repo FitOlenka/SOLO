@@ -708,12 +708,15 @@
             }
             .hero h1 { font-size: 2.6rem; }
             .hero-buttons { justify-content: center; }
-            .hero-image { order: -1; margin-bottom: 30px; } 
-            .hero-image img { max-width: 80%; border-width: 5px; }
+            
+            /* Ховаємо перше фото на мобільних пристроях */
+            .hero-image { display: none; } 
             
             .about-container { flex-direction: column; text-align: center; }
             .about-content .section-title { text-align: center !important; }
-            .solo-guide h2 { font-size: 2rem; }[data-aos-delay] { transition-delay: 0s !important; animation-delay: 0s !important; }
+            .solo-guide h2 { font-size: 2rem; }
+            
+            [data-aos-delay] { transition-delay: 0s !important; animation-delay: 0s !important; }
         }
     </style>
 </head>
@@ -744,7 +747,7 @@
             </div>
         </div>
         <div class="hero-image" data-aos="fade-left" data-aos-delay="200">
-            <!-- ТУТ ТЕПЕР ФОТО 1.jpg -->
+            <!-- Це фото буде видно тільки на комп'ютері -->
             <img src="1.jpg" alt="Олена - тренер та нутриціолог">
         </div>
     </header>
@@ -860,7 +863,6 @@
 
                 <p style="text-align: center; font-weight: 800; font-size: 1.2rem; margin-top: 40px; color: var(--gold-text);">Твоє SOLO починається тут. Налаштуй свій чистий звук вже сьогодні.</p>
                 
-                <!-- Нова кнопка в самому кінці тексту -->
                 <div style="text-align: center; margin-top: 30px;">
                     <a href="#contact" class="btn" style="background-color: var(--heading-color); color: #fff; width: auto; padding: 15px 40px;" onclick="selectPlan('Гайд SOLO')">Отримати гайд</a>
                 </div>
@@ -872,7 +874,6 @@
     <section id="about" class="about-section" data-aos="fade-up">
         <div class="about-container">
             <div class="about-img-wrap">
-                <!-- Повернув твоє фото сюди -->
                 <img src="https://i.postimg.cc/HL3ttWVV/IMG-4797.jpg" alt="Олена - тренер та нутриціолог" class="about-img" loading="lazy">
             </div>
             <div class="about-content">
