@@ -665,7 +665,9 @@
             background: rgba(30, 41, 59, 0.7);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            overflow-y: auto;
+            padding: 20px;
             z-index: 2000;
             opacity: 0;
             visibility: hidden;
@@ -680,11 +682,12 @@
 
         .modal-content {
             background: #fff;
-            padding: 50px 40px;
+            padding: 40px 30px;
             border-radius: 24px;
             text-align: center;
             max-width: 400px;
-            width: 90%;
+            width: 100%;
+            margin: auto;
             transform: scale(0.9);
             transition: 0.3s ease;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -914,8 +917,8 @@
             <h1>Твоє тіло — унікальний інструмент. <span class="highlight">Навчися ним керувати.</span></h1>
             <p>Покроковий план змін, який підлаштовується під твоє життя, а не навпаки.</p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn btn-pulse" style="width: auto;" onclick="selectPlan('Безкоштовний розбір раціону')">Записатися на безкоштовний розбір</a>
-                <a href="#services" class="btn-outline" style="width: auto;">Обрати формат</a>
+                <a href="#contact" class="btn btn-pulse" style="width: auto;" onclick="selectPlan('Безкоштовна консультація')">Записатися на безкоштовну консультацію</a>
+                <button class="btn-outline" style="width: auto;" onclick="showConsultationInfo()">Що буде на консультації?</button>
             </div>
         </div>
         <div class="hero-image" data-aos="fade-left" data-aos-delay="200">
@@ -1171,7 +1174,7 @@
                 <div class="form-group">
                     <select id="selectedPlan" required>
                         <option value="" disabled selected>Оберіть бажаний формат роботи...</option>
-                        <option value="Безкоштовний розбір раціону">🎁 Безкоштовний розбір раціону</option>
+                        <option value="Безкоштовна консультація">🎁 Безкоштовна консультація</option>
                         <option value="1 Рівень: «Налаштування»">1 Рівень: «Налаштування» (500 грн)</option>
                         <option value="2 Рівень: «Резонанс»">2 Рівень: «Резонанс» (1000 грн)</option>
                         <option value="3 Рівень: «Акорд»">3 Рівень: «Акорд» (500 грн)</option>
@@ -1224,7 +1227,39 @@
             <div class="modal-icon">💚</div>
             <h3 class="modal-title">Дякую за довіру!</h3>
             <p class="modal-text">Вашу заявку успішно надіслано. Я зв'яжуся з вами найближчим часом, щоб обговорити всі деталі.</p>
-            <button class="btn" onclick="closeModal()">Добре, чекаю</button>
+            <button class="btn" onclick="closeModal('successModal')">Добре, чекаю</button>
+        </div>
+    </div>
+
+    <!-- Модалка інформації про консультацію -->
+    <div class="modal-overlay" id="consultationModal">
+        <div class="modal-content" style="max-width: 550px; text-align: left;">
+            <h3 class="modal-title" style="text-align: center; margin-bottom: 25px;">Що ми встигнемо за 20 хвилин?</h3>
+            <p style="margin-bottom: 20px; font-weight: 500; font-size: 0.95rem; line-height: 1.6;">Я знаю, як важко почати, коли навколо сотні порад, а результату немає. Тому я пропопонує почати з простої розмови.</p>
+            
+            <ul style="list-style: none; margin-bottom: 25px;">
+                <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
+                    <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">01.</span>
+                    З’ясуємо, де ти втрачаєш енергію та чому вага/м'язи не змінюються так, як хочеться.
+                </li>
+                <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
+                    <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">02.</span>
+                    Я підкажу, на які нутрієнти або типи навантажень тобі варто звернути увагу (без загальних фраз, тільки по твоєму запиту).
+                </li>
+                <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
+                    <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">03.</span>
+                    Ти зрозумієш, чи підходить тобі мій метод роботи.
+                </li>
+            </ul>
+
+            <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 30px; background: #f8fafc; padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent);">
+                Це не зобов’язує тебе купувати пакет послуг. Це твоя можливість отримати професійний погляд на свою ситуацію і вирішити, що робити далі.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a href="#contact" class="btn" onclick="closeModal('consultationModal'); selectPlan('Безкоштовна консультація')">Записатися на консультацію</a>
+                <button class="btn-outline" style="border: none; font-size: 0.9rem;" onclick="closeModal('consultationModal')">Закрити</button>
+            </div>
         </div>
     </div>
 
@@ -1313,10 +1348,17 @@
         });
 
         // Модалка
-        const modal = document.getElementById('successModal');
-        function showModal() { modal.classList.add('active'); }
-        function closeModal() { modal.classList.remove('active'); }
-        modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+        function showModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        
+        function showConsultationInfo() {
+            showModal('consultationModal');
+        }
+
+        const modals = document.querySelectorAll('.modal-overlay');
+        modals.forEach(modal => {
+            modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(modal.id); });
+        });
 
         // Блокування автоматичного скролу до форми (актуально для Instagram Browser)
         function forceScrollTop() {
