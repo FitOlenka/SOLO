@@ -658,6 +658,79 @@
             color: var(--accent);
         }
 
+        /* --- ВІДГУКИ --- */
+        .reviews-section {
+            padding: 100px 5%;
+            background-color: #fff;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: #f8fafc;
+            padding: 40px;
+            border-radius: 32px;
+            position: relative;
+            transition: 0.3s ease;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border-color: var(--accent);
+        }
+
+        .review-quote {
+            font-size: 3rem;
+            color: var(--accent);
+            opacity: 0.2;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-family: serif;
+        }
+
+        .review-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #334155;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            color: var(--heading-color);
+            margin-bottom: 2px;
+        }
+
+        .author-info p {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .review-stars {
+            color: #fbbf24;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
         /* --- МОДАЛЬНЕ ВІКНО --- */
         .modal-overlay {
             position: fixed;
@@ -902,6 +975,7 @@
         <div class="hamburger" onclick="toggleMenu()">☰</div>
         <div class="nav-links" id="navLinks">
             <a href="#services" onclick="toggleMenu()">Формати роботи</a>
+            <a href="#reviews" onclick="toggleMenu()">Відгуки</a>
             <a href="#solo-guide" onclick="toggleMenu()">Гайд</a>
             <a href="#about" onclick="toggleMenu()">Про мене</a>
             <a href="#faq" onclick="toggleMenu()">FAQ</a>
@@ -1076,6 +1150,61 @@
         </div>
     </section>
 
+    <!-- Відгуки -->
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <h2 class="section-title">Відгуки наших клієнтів</h2>
+            <p style="text-align: center; margin-bottom: 50px; color: #64748b;">Історії тих, хто вже знайшов свій ритм з Оленою</p>
+            
+            <div class="reviews-grid">
+                <!-- Відгук 1 -->
+                <div class="review-card" data-aos="fade-up">
+                    <span class="review-quote">“</span>
+                    <div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">«...рухатися стало легше, самопочуття значно покращилось, і навіть з’явилася ще одна “переможна” дірочка на ремені. Дуже хочу зробити тренування системними, з такою підтримкою це обов'язково вдасться!»</p>
+                    </div>
+                    <div class="review-author">
+                        <div class="author-info">
+                            <h4>Nathali Volkova</h4>
+                            <p>Клієнтка SOLO</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Відгук 2 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="100">
+                    <span class="review-quote">“</span>
+                    <div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">«З Оленою кожне тренування — це розрив шаблонів, тренування не лише тіла, але і мозку. Олена завжди піде на зустріч, але і розслабитися не дасть. Дякую за мотивацію і настрій!»</p>
+                    </div>
+                    <div class="review-author">
+                        <div class="author-info">
+                            <h4>Тетяна Лемента</h4>
+                            <p>Клієнтка SOLO</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Відгук 3 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="200">
+                    <span class="review-quote">“</span>
+                    <div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">«Я займаюся вже більше року. Моє тіло стало більш підтягнутим, з’явився баланс і відчуття опори на себе. Я почала більше довіряти своєму тілу. Для мене ці тренування — це і відновлення, і турбота про себе.»</p>
+                    </div>
+                    <div class="review-author">
+                        <div class="author-info">
+                            <h4>Настуся Лобарева</h4>
+                            <p>Клієнтка SOLO</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Гайд SOLO -->
     <section id="solo-guide" class="solo-guide" data-aos="zoom-in">
         <div class="solo-container">
@@ -1235,7 +1364,7 @@
     <div class="modal-overlay" id="consultationModal">
         <div class="modal-content" style="max-width: 550px; text-align: left;">
             <h3 class="modal-title" style="text-align: center; margin-bottom: 25px;">Що ми встигнемо за 20 хвилин?</h3>
-            <p style="margin-bottom: 20px; font-weight: 500; font-size: 0.95rem; line-height: 1.6;">Я знаю, як важко почати, коли навколо сотні порад, а результату немає. Тому я пропопоную почати з простої розмови.</p>
+            <p style="margin-bottom: 20px; font-weight: 500; font-size: 0.95rem; line-height: 1.6;">Я знаю, як важко почати, коли навколо сотні порад, а результату немає. Тому я пропоную почати з простої розмови.</p>
             
             <ul style="list-style: none; margin-bottom: 25px;">
                 <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
